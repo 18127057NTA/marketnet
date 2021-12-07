@@ -1,19 +1,19 @@
 using Core.Entities;
-using Infrastructure.Data;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
+
 
 namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProductsController: ControllerBase
+    public class ProductsController : ControllerBase
     {
-        private readonly StoreContext _context;
-        public ProductsController(StoreContext context)
+        private readonly IProductRepository _repo;
+        public ProductsController(IProductRepository repo)
         {
-            _context = context;
-
+            _repo = repo;
         }
 
         [HttpGet]
@@ -21,7 +21,7 @@ namespace API.Controllers
         {
 
             //var products = _context.Products.ToList();
-
+            /*
             var products = await (from p in _context.Products
                             join t in _context.ProductTypes on p.t_type.Id equals t.Id
                             join st in _context.Stores on p.t_storeid.Id equals st.Id
@@ -37,16 +37,24 @@ namespace API.Controllers
                                 ProductQuantity = p.Quantity,
                                 ProductUnitPrice = p.UnitPrice
                             }).ToListAsync();
-
+            */
             /*Lấy thông tin cần phải lấy
 
             */
+            var products = await _repo.GetProductsAsync();
 
             return Ok(products);
+
+
         }
 
         [HttpGet("{id}")]
-        //public async Task<ActionResult<Product>>>  GetProduct(int id){return await _context.Products.FindAsync(id);}
+        public async Task<ActionResult<Product>> GetProduct(int id)
+        {
+            return await _repo.GetProductByIdAsync(id);
+        }
+
+        /*
         public async Task<ActionResult<List<Product>>> GetProduct(int id)
         {
             
@@ -68,6 +76,25 @@ namespace API.Controllers
                             }).ToListAsync();
 
             return Ok(products);
+        }*/
+
+        [HttpGet("stores")]
+        public async Task<ActionResult<IReadOnlyList<Store>>> GetStores()
+        {
+            return Ok(await _repo.GetStoresAsync());
+        }
+
+        [HttpGet("suppliers")]
+        public async Task<ActionResult<IReadOnlyList<Supplier>>> GetSuppliers()
+        {
+            return Ok(await _repo.GetSuppliersAsync());
+        }
+
+        [HttpGet("types")]
+        public async Task<ActionResult<IReadOnlyList<Store>>> GetProductTypes()
+        {
+            return Ok(await _repo.GetProductTypesAsync());
         }
     }
+
 }

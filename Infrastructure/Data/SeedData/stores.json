@@ -1,0 +1,30 @@
+[
+    {
+      "Name": "Coo.opFood",
+      "SupplierId": 1,
+      "Address": "123 Hùng Vương phường 9 quận 5",
+      "CreatedDate": "2021-08-07 00:00:00",
+      "UpdatedDate": "2021-08-07 00:00:00"
+    },
+    {
+      "Name": "BigC",
+      "SupplierId": 2,
+      "Address": "134 Tô Hiến Thành phường 6 quận 10",
+      "CreatedDate": "2021-09-17 10:25:12",
+      "UpdatedDate": "2021-09-17 10:25:12"
+    },
+    {
+      "Name": "LotterMart",
+      "SupplierId": 3,
+      "Address": "5 Lý Thường Kiệt phường 7 quận 10",
+      "CreatedDate": "2021-08-27 10:20:04",
+      "UpdatedDate": "2021-08-27 10:20:04"
+    },
+    {
+      "Name": "VinmartPlus",
+      "SupplierId": 4,
+      "Address": "12 Nguyễn Duy Dương phường 6 quận 5",
+      "CreatedDate": "2021-09-14 11:50:10",
+      "UpdatedDate": "2021-09-14 11:50:10"
+    }
+  ]

@@ -1,0 +1,202 @@
+[
+    {
+      "Name": "Bột mì",
+      "ProductTypeId": 1,
+      "StoreId": 1,
+      "Quantity": 1,
+      "UnitPrice": 1300,
+      "PictureUrl": "images/products/bot-mi.png",
+      "CreatedDate": "2021-12-07 00:00:00",
+      "UpdatedDate": "2021-12-07 00:00:00"
+    },
+    {
+      "Name": "Gạo",
+      "ProductTypeId": 1,
+      "StoreId": 2,
+      "Quantity": 2,
+      "UnitPrice": 1400,
+      "PictureUrl": "images/products/gao.png",
+      "CreatedDate": "2021-12-06 12:02:03",
+      "UpdatedDate": "2021-12-06 12:02:03"
+    },
+    {
+      "Name": "Đậu xanh",
+      "ProductTypeId": 1,
+      "StoreId": 3,
+      "Quantity": 3,
+      "UnitPrice": 1500,
+      "PictureUrl": "images/products/dau-xanh.png",
+      "CreatedDate": "2021-12-05 05:02:03",
+      "UpdatedDate": "2021-12-05 05:02:03"
+    },
+    {
+      "Name": "Bột sắn",
+      "ProductTypeId": 1,
+      "StoreId": 4,
+      "Quantity": 4,
+      "UnitPrice": 1600,
+      "PictureUrl": "images/products/bot-san.png",
+      "CreatedDate": "2021-11-16 06:02:15",
+      "UpdatedDate": "2021-11-16 06:02:15"
+    },
+    {
+      "Name": "Bột lúa mạch",
+      "ProductTypeId": 1,
+      "StoreId":1,
+      "Quantity": 5,
+      "UnitPrice": 1700,
+      "PictureUrl": "images/products/bot-lua-mach.png",
+      "CreatedDate": "2021-10-20 08:52:03",
+      "UpdatedDate": "2021-10-20 08:52:03"
+    },
+    {
+      "Name": "Cải bó xôi",
+      "ProductTypeId": 2,
+      "StoreId": 2,
+      "Quantity": 1,
+      "UnitPrice": 1800,
+      "PictureUrl": "images/products/cai-bo-xoi.png",
+      "CreatedDate": "2021-12-02 09:20:15",
+      "UpdatedDate": "2021-12-02 09:20:15"
+    },
+    {
+      "Name": "Cà rốt",
+      "ProductTypeId": 2,
+      "StoreId": 3,
+      "Quantity": 2,
+      "UnitPrice": 1900,
+      "PictureUrl": "images/products/ca-rot.png",
+      "CreatedDate": "2021-10-20 11:02:25",
+      "UpdatedDate": "2021-10-20 11:02:25"
+    },
+    {
+      "Name": "Bột cải xanh",
+      "ProductTypeId": 2,
+      "StoreId": 4,
+      "Quantity": 3,
+      "UnitPrice": 2000,
+      "PictureUrl": "images/products/bot-cai-xanh.png",
+      "CreatedDate": "2021-9-06 10:05:13",
+      "UpdatedDate": "2021-9-06 10:05:13"
+    },
+    {
+      "Name": "Tỏi",
+      "ProductTypeId": 2,
+      "StoreId": 1,
+      "Quantity": 4,
+      "UnitPrice": 2100,
+      "PictureUrl": "images/products/toi.png",
+      "CreatedDate": "2021-11-12 04:14:03",
+      "UpdatedDate": "2021-11-12 04:14:03"
+    },
+    {
+      "Name": "Cải xoăn",
+      "ProductTypeId": 2,
+      "StoreId": 2,
+      "Quantity": 5,
+      "UnitPrice": 2200,
+      "PictureUrl": "images/products/cai-xoan.png",
+      "CreatedDate": "2021-10-16 05:02:51",
+      "UpdatedDate": "2021-10-16 05:02:51"
+    },
+    {
+      "Name": "Dầu ăn",
+      "ProductTypeId": 3,
+      "StoreId": 3,
+      "Quantity": 1,
+      "UnitPrice": 2300,
+      "PictureUrl": "images/products/dau-an.png",
+      "CreatedDate": "2021-1-06 10:23:26",
+      "UpdatedDate": "2021-1-06 10:23:26"
+    },
+    {
+      "Name": "Xì dầu",
+      "ProductTypeId": 3,
+      "StoreId": 4,
+      "Quantity": 2,
+      "UnitPrice": 2400,
+      "PictureUrl": "images/products/xi-dau.png",
+      "CreatedDate": "2021-1-06 11:25:12",
+      "UpdatedDate": "2021-1-06 11:25:12"
+    },
+    {
+      "Name": "Dầu lạc",
+      "ProductTypeId": 3,
+      "StoreId": 1,
+      "Quantity": 3,
+      "UnitPrice": 2500,
+      "PictureUrl": "images/products/dau-lac.png",
+      "CreatedDate": "2021-1-06 11:24:14",
+      "UpdatedDate": "2021-1-06 11:24:14"
+    },
+    {
+      "Name": "Bột canh",
+      "ProductTypeId": 3,
+      "StoreId": 2,
+      "Quantity": 4,
+      "UnitPrice": 2600,
+      "PictureUrl": "images/products/bot-canh.png",
+      "CreatedDate": "2021-10-06 12:02:03",
+      "UpdatedDate": "2021-10-06 12:02:03"
+    },
+    {
+      "Name": "Nước mắm",
+      "ProductTypeId": 3,
+      "StoreId": 3,
+      "Quantity": 5,
+      "UnitPrice": 2700,
+      "PictureUrl": "images/products/nuoc-mam.png",
+      "CreatedDate": "2021-10-06 12:02:03",
+      "UpdatedDate": "2021-10-06 12:02:03"
+    },
+    {
+      "Name": "Khẩu trang",
+      "ProductTypeId": 4,
+      "StoreId": 4,
+      "Quantity": 1,
+      "UnitPrice": 2800,
+      "PictureUrl": "images/products/khau-trang.png",
+      "CreatedDate": "2021-11-06 12:02:03",
+      "UpdatedDate": "2021-11-06 12:02:03"
+    },
+    {
+      "Name": "Đồ bảo hộ",
+      "ProductTypeId": 4,
+      "StoreId": 1,
+      "Quantity": 2,
+      "UnitPrice": 2900,
+      "PictureUrl": "images/products/do-bao-ho.png",
+      "CreatedDate": "2021-11-15 12:12:14",
+      "UpdatedDate": "2021-11-15 12:12:14"
+    },
+    {
+      "Name": "Bình oxi",
+      "ProductTypeId": 4,
+      "StoreId": 2,
+      "Quantity": 3,
+      "UnitPrice": 3000,
+      "PictureUrl": "images/products/binh-oxi.png",
+      "CreatedDate": "2021-11-14 12:02:03",
+      "UpdatedDate": "2021-11-14 12:02:03"
+    },
+    {
+      "Name": "Que test",
+      "ProductTypeId": 4,
+      "StoreId": 3,
+      "Quantity": 4,
+      "UnitPrice": 3100,
+      "PictureUrl": "images/products/que-test.png",
+      "CreatedDate": "2021-11-24 05:12:25",
+      "UpdatedDate": "2021-11-24 05:12:25"
+    },
+    {
+      "Name": "Tấm chắn giọt bắn",
+      "ProductTypeId": 4,
+      "StoreId": 4,
+      "Quantity": 5,
+      "UnitPrice": 3200,
+      "PictureUrl": "images/products/tam-chan-giot-ban.png",
+      "CreatedDate": "2021-10-24 12:32:43",
+      "UpdatedDate": "2021-10-24 12:32:43"
+    }
+  ]

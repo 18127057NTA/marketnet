@@ -2,9 +2,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Entities
 {
-    public class Shipper
+    public class Shipper: BaseEntity // Mới thêm
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         [Column(TypeName = "nvarchar")]
         public string Name { get; set; }
@@ -24,11 +24,11 @@ namespace Core.Entities
         //Giấy tiêm
         [Column(TypeName = "nvarchar")]
         public string VaccinatedConfirmed {get; set;}
-        //Ngày tạo
+        /*//Ngày tạo
         [Column(TypeName = "datetime")]
         public DateTime CreatedDate {get; set;}
         //Ngày cập nhật
         [Column(TypeName = "datetime")]
-        public DateTime UpdatedDate {get; set;}
+        public DateTime UpdatedDate {get; set;}*/
     }
 }

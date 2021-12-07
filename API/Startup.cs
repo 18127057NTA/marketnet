@@ -1,3 +1,4 @@
+using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Thứ tự không quan trọng
             //Thêm lúc code controller Product
             services.AddSwaggerGen();
 
@@ -24,6 +26,10 @@ namespace API
             //SqlServer
             //services.AddDbContext<StoreContext>(
             //  x => x.UseSqlServer(_config.GetConnectionString("SqlServer")));
+
+            //Repo
+            services.AddScoped<IProductRepository, ProductRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -2,9 +2,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Entities
 {
-    public class Buyer
+    public class Buyer: BaseEntity // Mới thêm
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         
 
         [Column(TypeName = "nvarchar")]
@@ -22,12 +22,12 @@ namespace Core.Entities
         [Column(TypeName = "nvarchar")]
         public string Password {get; set;} //hashed
         
-        //Ngày tạo
+        /*//Ngày tạo
         [Column(TypeName = "datetime")]
         public DateTime CreatedDate {get; set;}
         
         //Ngày cập nhật
         [Column(TypeName = "datetime")]
-        public DateTime UpdatedDate {get; set;}
+        public DateTime UpdatedDate {get; set;}*/
     }
 }
