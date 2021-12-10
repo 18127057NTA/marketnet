@@ -16,10 +16,12 @@ namespace Infrastructure.Data
 
         public async Task<Product> GetProductByIdAsync(int id)
         {
+
             return await _context.Products
                 .Include(p => p.ProductType)
                 .Include(p => p.Store)
                 .FirstOrDefaultAsync(p => p.Id == id);
+            
         }
         /*
         public async Task<IReadOnlyList<Product>> GetProductsByIdAsync(int id)
@@ -30,7 +32,6 @@ namespace Infrastructure.Data
         */
         public async Task<IReadOnlyList<Product>> GetProductsAsync()
         {
-
             return await _context.Products
                 .Include(p => p.ProductType)
                 .Include(p => p.Store)
