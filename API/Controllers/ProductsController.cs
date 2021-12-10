@@ -1,4 +1,5 @@
 using API.Dtos;
+using API.Errors;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
@@ -9,9 +10,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductsController : ControllerBase
+    //Lúc chưa có BaseApiController
+    //[ApiController]
+    //[Route("api/[controller]")]
+    public class ProductsController : BaseApiController //ControllerBase
     {
         //Phần này là làm riêng rẻ không type T, nhớ coi lịch sử github
         /*
@@ -108,6 +110,8 @@ namespace API.Controllers
         [HttpGet("{id}")]
         //Chú ý loại trả về
         //public async Task<ActionResult<Product>> GetProduct(int id){} // Ban đầu
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             //return await _productsRepo.GetByIdAsync(id); // repo type T
@@ -138,7 +142,7 @@ namespace API.Controllers
                 UnitPrice = product.UnitPrice,
                 PictureUrl = product.PictureUrl
             };*/
-
+            if(product == null) return NotFound(new ApiResponse(404));
             //return dto + mapping
             return _mapper.Map<Product, ProductToReturnDto>(product);
         }

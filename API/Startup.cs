@@ -1,8 +1,8 @@
-using API.Helpers;
+using API.Extensions;
+using API.Middleware;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-
 namespace API
 {
     public class Startup
@@ -18,7 +18,11 @@ namespace API
         {
             //Thứ tự không quan trọng
             //Thêm lúc code controller Product
-            services.AddSwaggerGen();
+            /*
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+            });*/ // Thêm bên extension
 
             services.AddControllers();
             //Sqlite
@@ -31,21 +35,55 @@ namespace API
             //Repo
             services.AddScoped<IProductRepository, ProductRepository>();
 
+            //Extension
+            services.AddApplicationServices();
+            services.AddSwaggerDocumentation();
+
+           
+
+
             // Loại tổng quát T
-            services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
-            services.AddAutoMapper(typeof(MappingProfiles));
+            //services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
+            //services.AddAutoMapper(typeof(MappingProfiles));
+
+            /*services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = actionContext =>
+                {
+                    var errors = actionContext.ModelState
+                        .Where(e => e.Value.Errors.Count > 0)
+                        .SelectMany(x => x.Value.Errors)
+                        .Select(x => x.ErrorMessage).ToArray();
+
+                    var errorResponse = new ApiValidationErrorResponse
+                    {
+                        Errors = errors
+                    };
+
+                    return new BadRequestObjectResult(errorResponse);
+                };
+            });*/ // Thêm bên extension
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) // Thứ tự là quan trọng
         {
+            app.UseMiddleware<ExceptionMiddleware>();
+            /*app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1");
+                //c.RoutePrefix = ""; // Thêm ngoài
+            });*/ // Thêm bên extension
+
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
+                //app.UseDeveloperExceptionPage();
+
             }
+
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
             app.UseHttpsRedirection();
 
@@ -53,6 +91,9 @@ namespace API
             app.UseStaticFiles();
 
             app.UseAuthorization();
+
+            //Extension
+            app.UseSwaggerDocmentation();
 
             app.UseEndpoints(endpoints =>
             {
