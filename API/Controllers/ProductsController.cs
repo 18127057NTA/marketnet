@@ -1,5 +1,6 @@
 using API.Dtos;
 using API.Errors;
+using API.Helpers;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
@@ -73,13 +74,34 @@ namespace API.Controllers
         [HttpGet]
 
         //Trước đó public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts(){}
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts()
+        //Trước đó public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(){}
+        //Trước đó Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(string sort){}
+        //Trước đó public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts{}
+        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts
+        (
+            //Trước đó
+            /*
+            string sort,
+            int? storeId,
+            int? typeId,
+            int? supplierId*/
+
+            [FromQuery] ProductSpecPrams productPrams
+        )
         {
             //var products = await _productsRepo.ListAllAsync(); // repo type T
 
             // specification repo type T
-            var spec = new ProductsWithTypesStoresSuppliers();
+            var spec = new ProductsWithTypesStoresSuppliers(/*sort, storeId, typeId, supplierId*/ productPrams);
+            // paging count
+            var countSpec = new ProductWithFIltersForCountSpecification(productPrams);
+            var totalItems = await _productsRepo.CountAsync(countSpec);
+
+
             var products = await _productsRepo.ListAsync(spec);
+
+            //Paging
+            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
 
             //return Ok(products);// return không dto
 
@@ -104,7 +126,9 @@ namespace API.Controllers
             ).ToList();*/
 
             //return Dto + mapping
-            return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
+            //return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
+
+            return Ok(new Pagination<ProductToReturnDto>(productPrams.PageIndex, productPrams.PageSize, totalItems, data));
         }
 
         [HttpGet("{id}")]
@@ -142,7 +166,7 @@ namespace API.Controllers
                 UnitPrice = product.UnitPrice,
                 PictureUrl = product.PictureUrl
             };*/
-            if(product == null) return NotFound(new ApiResponse(404));
+            if (product == null) return NotFound(new ApiResponse(404));
             //return dto + mapping
             return _mapper.Map<Product, ProductToReturnDto>(product);
         }

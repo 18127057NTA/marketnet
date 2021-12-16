@@ -3,6 +3,7 @@ using API.Middleware;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+
 namespace API
 {
     public class Startup
@@ -38,8 +39,15 @@ namespace API
             //Extension
             services.AddApplicationServices();
             services.AddSwaggerDocumentation();
+            //
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                });
+            });
 
-           
 
 
             // Loại tổng quát T
@@ -77,11 +85,11 @@ namespace API
                 //c.RoutePrefix = ""; // Thêm ngoài
             });*/ // Thêm bên extension
 
-            if (env.IsDevelopment())
+            /*if (env.IsDevelopment())
             {
                 //app.UseDeveloperExceptionPage();
 
-            }
+            }*/
 
             app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
@@ -90,6 +98,8 @@ namespace API
             app.UseRouting();
             app.UseStaticFiles();
 
+            //Cors
+            app.UseCors("CorsPolicy");
             app.UseAuthorization();
 
             //Extension
