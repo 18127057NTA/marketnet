@@ -70,14 +70,14 @@
       "UpdatedDate": "2021-10-20 11:02:25"
     },
     {
-      "Name": "Bột cải xanh",
+      "Name": "Bông cải xanh",
       "ProductTypeId": 2,
       "StoreId": 4,
       "Quantity": 3,
       "UnitPrice": 2000,
-      "PictureUrl": "images/products/bot-cai-xanh.png",
-      "CreatedDate": "2021-9-06 10:05:13",
-      "UpdatedDate": "2021-9-06 10:05:13"
+      "PictureUrl": "images/products/bong-cai-xanh.png",
+      "CreatedDate": "2021-09-06 10:05:13",
+      "UpdatedDate": "2021-09-06 10:05:13"
     },
     {
       "Name": "Tỏi",
@@ -106,8 +106,8 @@
       "Quantity": 1,
       "UnitPrice": 2300,
       "PictureUrl": "images/products/dau-an.png",
-      "CreatedDate": "2021-1-06 10:23:26",
-      "UpdatedDate": "2021-1-06 10:23:26"
+      "CreatedDate": "2021-01-06 10:23:26",
+      "UpdatedDate": "2021-01-06 10:23:26"
     },
     {
       "Name": "Xì dầu",
@@ -116,8 +116,8 @@
       "Quantity": 2,
       "UnitPrice": 2400,
       "PictureUrl": "images/products/xi-dau.png",
-      "CreatedDate": "2021-1-06 11:25:12",
-      "UpdatedDate": "2021-1-06 11:25:12"
+      "CreatedDate": "2021-01-06 11:25:12",
+      "UpdatedDate": "2021-01-06 11:25:12"
     },
     {
       "Name": "Dầu lạc",
@@ -126,8 +126,8 @@
       "Quantity": 3,
       "UnitPrice": 2500,
       "PictureUrl": "images/products/dau-lac.png",
-      "CreatedDate": "2021-1-06 11:24:14",
-      "UpdatedDate": "2021-1-06 11:24:14"
+      "CreatedDate": "2021-01-06 11:24:14",
+      "UpdatedDate": "2021-01-06 11:24:14"
     },
     {
       "Name": "Bột canh",

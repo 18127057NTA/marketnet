@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { IPagination } from './models/pagination';
-import { IProduct } from './models/product';
+import { IPagination } from './shared/models/pagination';
+import { IProduct } from './shared/models/product';
 
 @Component({
   selector: 'app-root',
@@ -16,11 +16,12 @@ export class AppComponent implements OnInit {
   //products: any[]; // Trước đó
   products: IProduct[];
 
-  constructor(private http: HttpClient) {}
+  //constructor(private http: HttpClient) {}//Trước đó
+  constructor(){}
 
-  //Lấy danh sách sản phẩm,pageSize tối đa là 20 mà để dôi ra 50
+  //Lấy danh sách sản phẩm,pageSize tối đa là 20 mà để dôi ra 50, khi mới vô root
   ngOnInit(): void {
-    this.http.get('https://localhost:5001/api/products?pageSize=50').subscribe(
+    /*this.http.get('https://localhost:5001/api/products?pageSize=50').subscribe(
       //(response: any) => { // trước đó
       (response: IPagination) => {
         this.products = response.data;
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit {
       (error) => {
         console.log(error);
       }
-    );
+    );*/ //Trước đó
+
   }
 }
