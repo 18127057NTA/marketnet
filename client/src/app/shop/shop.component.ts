@@ -12,7 +12,7 @@ import { ShopService } from './shop.service';
 })
 export class ShopComponent implements OnInit {
   //Tìm kiếm
-  @ViewChild('search', {static: true}) searchTerm: ElementRef;
+  @ViewChild('search', {static: false}) searchTerm: ElementRef;
   //Danh sách sản phẩm
   products: IProduct[];
   //Danh sách nhà cung cấp
