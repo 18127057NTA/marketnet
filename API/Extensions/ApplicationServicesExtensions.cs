@@ -10,7 +10,13 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            //Product - ms thêm
+            services.AddScoped<IProductRepository, ProductRepository>();
+            //Giỏ hàng
+            services.AddScoped<IBasketRepository, BasketRepository>();
+
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
+
             services.AddAutoMapper(typeof(MappingProfiles));
 
              services.Configure<ApiBehaviorOptions>(options =>

@@ -3,6 +3,7 @@ using API.Middleware;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
 namespace API
 {
@@ -48,8 +49,6 @@ namespace API
                 });
             });
 
-
-
             // Loại tổng quát T
             //services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
             //services.AddAutoMapper(typeof(MappingProfiles));
@@ -71,6 +70,12 @@ namespace API
                     return new BadRequestObjectResult(errorResponse);
                 };
             });*/ // Thêm bên extension
+            //Dịch vụ giỏ hàng
+            services.AddSingleton<IConnectionMultiplexer>(c =>
+            {
+                var configuration = ConfigurationOptions.Parse(_config.GetConnectionString("Redis"), true);
+                return ConnectionMultiplexer.Connect(configuration);
+            });
 
         }
 

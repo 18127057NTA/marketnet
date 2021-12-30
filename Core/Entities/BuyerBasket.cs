@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Core.Entities
 {
     public class BuyerBasket
@@ -11,13 +6,13 @@ namespace Core.Entities
 
         }
 
-        public BuyerBasket(int id)
+        public BuyerBasket(string id)
         { 
             Id = id; 
         }
 
-        public int Id {get; set;} // Tại sao trong code lại là kiểu string?
-        public List<BasketItem> Itmes {get; set;} = new List<BasketItem>();
+        public string Id {get; set;} // Tại sao trong code lại là kiểu string?
+        public List<BasketItem> Items {get; set;} = new List<BasketItem>();
         //
     }
 }
