@@ -26,8 +26,7 @@
       class="p-2"
       [routerLink]="['/']"
       routerLinkActive="active"
-
-      [routerLinkActiveOptions] = "{exact: true}"
+      [routerLinkActiveOptions]="{ exact: true }"
       >Trang chủ</a
     >
     <a class="p-2" routerLink="/shop" routerLinkActive="active">Cửa hàng</a>
@@ -35,11 +34,11 @@
   </nav>
   <!--Class để chứa button-->
   <div class="d-flex align-items-center">
-    <a class="position-relative">
+    <a routerLink="/basket" class="position-relative">
       <!--icon giỏ hàng margin right =5, kiểu text-màu đen(dark)-->
       <i class="fa fa-shopping-cart fa-2x mr-5 text-dark"></i>
       <!--Số trên giỏ hảng auto 5-->
-      <div class="cart-no">5</div>
+      <div *ngIf="basket$ | async as basket" class="cart-no">{{basket.items.length}}</div>
     </a>
     <!--Nút đăng nhập, margin right = 2-->
     <a class="btn btn-outline-secondary mr-2" href="#">Đăng nhập</a>

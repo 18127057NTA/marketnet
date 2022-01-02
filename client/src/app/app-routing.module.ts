@@ -6,7 +6,7 @@ import { TestErrorComponent } from './core/test-error/test-error.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, data: {breadcrumb: 'Trang chủ'} },
+  { path: '', component: HomeComponent, data: { breadcrumb: 'Trang chủ' } },
   {
     path: 'test-error',
     component: TestErrorComponent,
@@ -29,6 +29,18 @@ const routes: Routes = [
     loadChildren: () =>
       import('./shop/shop.module').then((mod) => mod.ShopModule),
     data: { breadcrumb: 'Cửa hàng' },
+  },
+  {
+    path: 'basket',
+    loadChildren: () =>
+      import('./basket/basket.module').then((mod) => mod.BasketModule),
+    data: { breadcrumb: 'Giỏ hàng' },
+  },
+  {
+    path: 'checkout',
+    loadChildren: () =>
+      import('./checkout/checkout.module').then((mod) => mod.CheckoutModule),
+    data: { breadcrumb: 'Checkout' },
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

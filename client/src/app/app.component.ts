@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { BasketService } from './basket/basket.service';
 import { IPagination } from './shared/models/pagination';
 import { IProduct } from './shared/models/product';
 
@@ -14,10 +15,10 @@ export class AppComponent implements OnInit {
   title = 'Marketnet';
 
   //products: any[]; // Trước đó
-  products: IProduct[];
+  //products: IProduct[];
 
   //constructor(private http: HttpClient) {}//Trước đó
-  constructor(){}
+  constructor(private basketService: BasketService){}
 
   //Lấy danh sách sản phẩm,pageSize tối đa là 20 mà để dôi ra 50, khi mới vô root
   ngOnInit(): void {
@@ -31,6 +32,13 @@ export class AppComponent implements OnInit {
         console.log(error);
       }
     );*/ //Trước đó
-
+    const basketId = localStorage.getItem('basket_id');
+    if(basketId){
+      this.basketService.getBasket(basketId).subscribe(() => {
+        console.log('initialized basket');
+      }, error => {
+        console.log(error);
+      });
+    }
   }
 }

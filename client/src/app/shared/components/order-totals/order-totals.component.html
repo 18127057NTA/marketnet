@@ -1,0 +1,23 @@
+<div class="bg-light px-4 py-3 text-uppercase font-weight-bold">
+  Tóm tắt hóa đơn
+</div>
+<div class="p-4">
+  <p class="font-italic mb-4">
+    Phí giao hàng sẽ được thêm tùy theo lựa chọn của khách hàng trong phần
+    checkout
+  </p>
+  <ul class="list-unstyled mb-4" *ngIf="basketTotal$ | async as totals">
+    <li class="d-flex justify-content-between py-3 border-bottom">
+      <strong class="text-muted">Giao hàng và xử lý</strong>
+      <strong>{{ totals.shipping | currency: 'VND' }}</strong>
+    </li>
+    <li class="d-flex justify-content-between py-3 border-bottom">
+      <strong class="text-muted">Tổng giá trị mặt hàng</strong>
+      <strong>{{ totals.subtotal | currency: 'VND' }}</strong>
+    </li>
+    <li class="d-flex justify-content-between py-3 border-bottom">
+      <strong class="text-muted"> Tổng cộng</strong>
+      <strong>{{ totals.total | currency: 'VND' }}</strong>
+    </li>
+  </ul>
+</div>
