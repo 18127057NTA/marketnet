@@ -2,6 +2,7 @@ using API.Extensions;
 using API.Middleware;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 
@@ -30,6 +31,12 @@ namespace API
             //Sqlite
             services.AddDbContext<StoreContext>(
                 x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
+
+            //Nhận dạng người dùng
+            services.AddDbContext<AppIdentityDbContext>(
+                x => { 
+                    x.UseSqlite(_config.GetConnectionString("IdentityConnection")); 
+                });
             //SqlServer
             //services.AddDbContext<StoreContext>(
             //  x => x.UseSqlServer(_config.GetConnectionString("SqlServer")));
@@ -39,6 +46,9 @@ namespace API
 
             //Extension
             services.AddApplicationServices();
+            //Dịch vụ nhận dạng
+            services.AddIdentityServices(_config);
+
             services.AddSwaggerDocumentation();
             //
             services.AddCors(opt =>
@@ -77,6 +87,8 @@ namespace API
                 return ConnectionMultiplexer.Connect(configuration);
             });
 
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -105,6 +117,9 @@ namespace API
 
             //Cors
             app.UseCors("CorsPolicy");
+
+            //Identity web token
+            app.UseAuthentication();
             app.UseAuthorization();
 
             //Extension
