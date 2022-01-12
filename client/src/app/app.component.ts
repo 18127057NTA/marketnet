@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { AccountService } from './account/account.service';
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from './basket/basket.service';
 import { IPagination } from './shared/models/pagination';
@@ -18,7 +19,10 @@ export class AppComponent implements OnInit {
   //products: IProduct[];
 
   //constructor(private http: HttpClient) {}//Trước đó
-  constructor(private basketService: BasketService){}
+  constructor(
+    private basketService: BasketService,
+    private accountService: AccountService
+  ) {}
 
   //Lấy danh sách sản phẩm,pageSize tối đa là 20 mà để dôi ra 50, khi mới vô root
   ngOnInit(): void {
@@ -31,14 +35,34 @@ export class AppComponent implements OnInit {
       (error) => {
         console.log(error);
       }
-    );*/ //Trước đó
-    const basketId = localStorage.getItem('basket_id');
-    if(basketId){
-      this.basketService.getBasket(basketId).subscribe(() => {
-        console.log('initialized basket');
-      }, error => {
+    );*/
+    //Trước đó
+    this.loadBasket();
+    this.loadCurrentUser();
+  }
+  loadCurrentUser() {
+    const token = localStorage.getItem('token');
+    this.accountService.loadCurrentUser(token).subscribe(
+      () => {
+        console.log('loaded user');
+      },
+      (error) => {
         console.log(error);
-      });
+      }
+    );
+  }
+
+  loadBasket() {
+    const basketId = localStorage.getItem('basket_id');
+    if (basketId) {
+      this.basketService.getBasket(basketId).subscribe(
+        () => {
+          console.log('initialized basket');
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     }
   }
 }

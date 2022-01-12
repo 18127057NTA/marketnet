@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center mt-5">
+  <div class="col-3">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Đăng nhập</h1>
+      </div>
+      <!-- <div class="form-label-group">
+        <input
+          formControlName="email"
+          type="email"
+          id="inputEmail"
+          class="form-control"
+          placeholder="Email address"
+        />
+        <label for="inputEmail">Email</label>
+      </div>
+
+      <div class="form-label-group">
+        <input
+          formControlName="password"
+          type="password"
+          id="inputPassword"
+          class="form-control"
+          placeholder="Password"
+        />
+        <label for="inputPassword">Mật khẩu</label>
+      </div> -->
+      <app-text-input
+        formControlName="email"
+        [label]="'email'"
+      ></app-text-input>
+      <app-text-input
+        formControlName="password"
+        [label]="'mật khẩu'"
+        [type]="'password'"
+      ></app-text-input>
+
+      <button
+        [disabled]="loginForm.invalid"
+        class="btn btn-lg btn-primary btn-block"
+        type="submit"
+      >
+        Đăng nhập
+      </button>
+    </form>
+  </div>
+  <!--<div class="col-4">
+    <p>Form Status: {{loginForm.status}}</p>
+    <p>Email Status: {{loginForm.get('email').status}}</p>
+    <p>Email Touched: {{loginForm.get('email').touched}}</p>
+    <p>Email Dirty: {{loginForm.get('email').dirty}}</p>
+    <pre>{{loginForm.value | json}}</pre>
+  </div>-->
+</div>
