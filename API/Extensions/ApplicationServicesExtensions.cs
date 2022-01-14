@@ -13,6 +13,9 @@ namespace API.Extensions
         {
             //Token
             services.AddScoped<ITokenService, TokenService>();
+            //Order service
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             //Product - ms thêm
             services.AddScoped<IProductRepository, ProductRepository>();
             //Giỏ hàng

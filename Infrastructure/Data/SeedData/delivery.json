@@ -1,0 +1,30 @@
+[
+  {
+    "Id": 1,
+    "ShortName": "UPS1",
+    "Description": "Giao hàng nhanh chóng",
+    "DeliveryTime": "1-2 Ngày",
+    "Price": 10000
+  },
+  {
+    "Id": 2,
+    "ShortName": "UPS2",
+    "Description": "Giao hàng trong vòng 5 ngày",
+    "DeliveryTime": "2-5 Ngày",
+    "Price": 5000
+  },
+  {
+    "Id": 3,
+    "ShortName": "UPS3",
+    "Description": "Giao tiêu chuẩn với giá rẻ",
+    "DeliveryTime": "5-10 Ngày",
+    "Price": 2000
+  },
+  {
+    "Id": 4,
+    "ShortName": "FREE",
+    "Description": "Miễn phí! Đó là sự lựa chọn của bạn",
+    "DeliveryTime": "1-2 Tuần",
+    "Price": 0
+  }
+]
