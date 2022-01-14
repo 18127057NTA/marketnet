@@ -1,3 +1,35 @@
 <div class="container mt-5">
-    <h1>Đăng nhập để xem thông tin này</h1>
+  <div class="row">
+    <div class="col-8">
+      <app-stepper [linearModeSelected]="false" #appStepper>
+        <cdk-step
+          [label]="'Địa chỉ'"
+          [completed]="checkoutForm.get('addressForm').valid"
+        >
+          <app-checkout-address
+            [checkoutForm]="checkoutForm"
+          ></app-checkout-address>
+        </cdk-step>
+        <cdk-step
+          [label]="'Giao hàng'"
+          [completed]="checkoutForm.get('deliveryForm').valid"
+        >
+          <app-checkout-delivery
+            [checkoutForm]="checkoutForm"
+          ></app-checkout-delivery>
+        </cdk-step>
+        <cdk-step [label]="'Tổng cộng'">
+          <app-checkout-review></app-checkout-review>
+        </cdk-step>
+        <cdk-step [label]="'Thanh toán'">
+          <app-checkout-payment
+            [checkoutForm]="checkoutForm"
+          ></app-checkout-payment>
+        </cdk-step>
+      </app-stepper>
+    </div>
+    <div class="col-4">
+      <app-order-totals></app-order-totals>
+    </div>
+  </div>
 </div>

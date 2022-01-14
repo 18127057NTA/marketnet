@@ -1,0 +1,73 @@
+<div class="mt-4" [formGroup]="checkoutForm">
+  <div class="d-flex justify-content-between align-items-center">
+    <h4>Địa chỉ giao hàng</h4>
+    <button
+      (click)="saveUserAddress()"
+      class="btn btn-outline-success mb-3"
+      [disabled]="
+        !checkoutForm.get('addressForm').valid ||
+        !checkoutForm.get('addressForm').dirty
+      "
+    >
+      Đặt làm địa chỉ mặc định
+    </button>
+  </div>
+  <div class="row" formGroupName="addressForm">
+    <div class="form-group col-6">
+      <app-text-input
+        [label]="'Tên'"
+        formControlName="firstName"
+      ></app-text-input>
+    </div>
+    <div class="form-group col-6">
+      <app-text-input
+        [label]="'Họ'"
+        formControlName="lastName"
+      ></app-text-input>
+    </div>
+    <div class="form-group col-6">
+      <app-text-input
+        [label]="'Đường'"
+        formControlName="street"
+      ></app-text-input>
+    </div>
+    <div class="form-group col-6">
+      <app-text-input
+        [label]="'Phường'"
+        formControlName="ward"
+      ></app-text-input>
+    </div>
+    <div class="form-group col-6">
+      <app-text-input
+        [label]="'Quận'"
+        formControlName="district"
+      ></app-text-input>
+    </div>
+    <div class="form-group col-6">
+      <app-text-input [label]="'Thành phố'" formControlName="city"></app-text-input>
+    </div>
+    <div class="form-group col-6">
+      <app-text-input
+        [label]="'Tỉnh'"
+        formControlName="province"
+      ></app-text-input>
+    </div>
+    <div class="form-group col-6">
+      <app-text-input
+        [label]="'Zip code'"
+        formControlName="zipCode"
+      ></app-text-input>
+    </div>
+  </div>
+</div>
+
+<div
+  class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5"
+>
+  <button class="btn btn-outline-primary" routerLink="/basket">
+    <i class="fa fa-angle-left"></i> Trở về giỏ hàng
+  </button>
+  <button class="btn btn-primary" cdkStepperNext>
+    Tới giao hàng <i class="fa fa-angle-right"></i>
+  </button>
+</div>

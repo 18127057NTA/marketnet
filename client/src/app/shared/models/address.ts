@@ -6,5 +6,5 @@ export interface IAddress {
     district: string;
     city: string;
     provice: string;
-    zipcode: string;
+    zipCode: string;
 }
