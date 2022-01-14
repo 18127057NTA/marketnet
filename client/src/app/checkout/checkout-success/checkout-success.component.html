@@ -1,6 +1,18 @@
 <div class="container mt-5">
-    <div><i class="fa fa-check-circle fa-5x" style="color: green;"></i></div>
-    <h2>Cảm ơn. Đơn hàng của bạn đã được xác nhận</h2>
-    <p class="mb-4">Đơn hàng của bạn chưa được giao. Chúng tôi đang liên hệ chủ cửa hàng</p>
-    <button class="btn btn-outline-success">Xem đơn hàng</button>
+  <div><i class="fa fa-check-circle fa-5x" style="color: green"></i></div>
+  <h2>Cảm ơn. Đơn hàng của bạn đã được xác nhận</h2>
+  <p class="mb-4">
+    Đơn hàng của bạn chưa được giao. Chúng tôi đang liên hệ chủ cửa hàng
+  </p>
+  <!--<button class="btn btn-outline-success">Xem đơn hàng</button>-->
+  <button
+    *ngIf="order"
+    routerLink="/orders/{{ order?.id }}"
+    class="btn btn-outline-success"
+  >
+    Xem đơn hàng
+  </button>
+  <button *ngIf="!order" routerLink="/orders" class="btn btn-outline-success">
+    Xem các đơn hàng của bạn
+  </button>
 </div>
