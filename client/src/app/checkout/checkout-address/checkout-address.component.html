@@ -44,7 +44,10 @@
       ></app-text-input>
     </div>
     <div class="form-group col-6">
-      <app-text-input [label]="'Thành phố'" formControlName="city"></app-text-input>
+      <app-text-input
+        [label]="'Thành phố'"
+        formControlName="city"
+      ></app-text-input>
     </div>
     <div class="form-group col-6">
       <app-text-input
@@ -67,7 +70,11 @@
   <button class="btn btn-outline-primary" routerLink="/basket">
     <i class="fa fa-angle-left"></i> Trở về giỏ hàng
   </button>
-  <button class="btn btn-primary" cdkStepperNext>
+  <button
+    [disabled]="checkoutForm.get('addressForm').invalid"
+    class="btn btn-primary"
+    cdkStepperNext
+  >
     Tới giao hàng <i class="fa fa-angle-right"></i>
   </button>
 </div>
