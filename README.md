@@ -34,3 +34,20 @@ settings:
     + chọn c# extension và bỏ dấu tích
 git:
 - init: tạo repo
+
+thao tác sql lite
+- dotnet ef database drop -p Infrastructure -s API: chuyển db từ project api sang project infrasture
+- dotnet ef migrations remove -p Infrastruture -s API: xóa migrations ở api và bỏ sang infrastructure (đây chỉ là entity - ko phải dữ liệu)
+- dotnet ef migrations add InitialCreate -p Infrastructure -s API -o Data/Migrations: thêm migrations vào infrastruture/data/migrations
+- Điều chỉnh migrations:
+
+Chú ý: https://stackoverflow.com/questions/52311053/more-than-one-dbcontext-was-found
+
+khi clone mới lại project:
+- xóa hết file trong Infrastructure/Data/Migration
+- dotnet ef database drop --StoreContext -p Infrastructure -s API
+dotnet ef migrations add <Tên nào khác migrations cũ> -p Infrastructure -s API -o Data/Migrations
+- chạy lại api
+
+setup angular
+- npm install -g @angular/cli@12
