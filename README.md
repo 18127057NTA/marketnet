@@ -51,3 +51,7 @@ dotnet ef migrations add <Tên nào khác migrations cũ> -p Infrastructure -s A
 
 setup angular
 - npm install -g @angular/cli@12
+chạy angular
+- ng serve
+
+tải mongodb driver 2.15.0 trên nuget gallery cho project api

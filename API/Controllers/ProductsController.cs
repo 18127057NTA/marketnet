@@ -6,7 +6,8 @@ using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
 using Microsoft.AspNetCore.Mvc;
-
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 
 namespace API.Controllers
@@ -77,7 +78,10 @@ namespace API.Controllers
         //Trước đó public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(){}
         //Trước đó Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(string sort){}
         //Trước đó public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts{}
-        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts
+
+        // 2022-03-22 8:53 ------------ MỚI COMMENT -----------
+        //public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts
+        public Task<ActionResult> GetProducts
         (
             //Trước đó
             /*
@@ -89,19 +93,26 @@ namespace API.Controllers
             [FromQuery] ProductSpecPrams productPrams
         )
         {
+            //---------------THUẦN SQL: KHÔNG ĐƯỢC EDIT-------------
+            
             //var products = await _productsRepo.ListAllAsync(); // repo type T
 
             // specification repo type T
-            var spec = new ProductsWithTypesStoresSuppliers(/*sort, storeId, typeId, supplierId*/ productPrams);
+            // 2022-03-22 8:53 ------------ MỚI COMMENT -----------
+                //var spec = new ProductsWithTypesStoresSuppliers(/*sort, storeId, typeId, supplierId*/ productPrams); //thay đổi theo Mongo
+
             // paging count
-            var countSpec = new ProductWithFIltersForCountSpecification(productPrams);
-            var totalItems = await _productsRepo.CountAsync(countSpec);
+            // 2022-03-22 8:53 ------------ MỚI COMMENT -----------
+            //var countSpec = new ProductWithFIltersForCountSpecification(productPrams);
+            // 2022-03-22 8:53 ------------ MỚI COMMENT -----------
+            //var totalItems = await _productsRepo.CountAsync(countSpec); //thay đổi theo Mongo 
 
-
-            var products = await _productsRepo.ListAsync(spec);
+            // 2022-03-22 8:53 ------------ MỚI COMMENT -----------
+            //var products = await _productsRepo.ListAsync(spec); //thay đổi theo Mongo
 
             //Paging
-            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
+            // 2022-03-22 8:53 ------------ MỚI COMMENT -----------
+            //var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products); //thay đổi theo Mongo
 
             //return Ok(products);// return không dto
 
@@ -128,7 +139,16 @@ namespace API.Controllers
             //return Dto + mapping
             //return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
 
-            return Ok(new Pagination<ProductToReturnDto>(productPrams.PageIndex, productPrams.PageSize, totalItems, data));
+            // 2022-03-22 8:53 ------------ MỚI COMMENT -----------
+            //return Ok(new Pagination<ProductToReturnDto>(productPrams.PageIndex, productPrams.PageSize, totalItems, data));
+
+            //----------------SƯA THEO MONGODB --------------
+            var client = new MongoClient("mongodb://localhost:27017");
+            var db = client.GetDatabase("vnvc-demo");
+            var collection = db.GetCollection<BsonDocument>("vaccine-info");
+            var result = collection.Find(new BsonDocument()).ToList(); // Lỗi ở đây
+            
+            return Ok(); // Do Task<ActionResult> -- chưa cần sửa
         }
 
         [HttpGet("{id}")]
