@@ -14,7 +14,6 @@ namespace Core.Entities
         public string Id { get; set; }
         public string Name { get; set; }
         public string PhongBenh {get; set;}
-
         public string MoTaThongTin {get; set;}
 
     }

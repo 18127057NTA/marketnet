@@ -4,6 +4,7 @@ using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using StackExchange.Redis;
 
 namespace API
@@ -26,6 +27,8 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });*/ // Thêm bên extension
+            //Mongo
+            services.RegisterMongoDbRepositories();
 
             services.AddControllers();
             //Sqlite
@@ -86,9 +89,6 @@ namespace API
                 var configuration = ConfigurationOptions.Parse(_config.GetConnectionString("Redis"), true);
                 return ConnectionMultiplexer.Connect(configuration);
             });
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

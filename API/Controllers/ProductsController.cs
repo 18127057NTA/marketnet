@@ -3,8 +3,10 @@ using API.Errors;
 using API.Helpers;
 using AutoMapper;
 using Core.Entities;
+using Core.Entities.Responses;
 using Core.Interfaces;
 using Core.Specifications;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -57,12 +59,18 @@ namespace API.Controllers
         private readonly IGenericRepository<Supplier> _suppliersRepo;
         private readonly IMapper _mapper;
 
+        //Vaccine
+        private readonly VaccineRepository _vaccineRepository;
+
         public ProductsController(
             IGenericRepository<Product> productsRepo,
             IGenericRepository<Store> storesRepo,
             IGenericRepository<ProductType> typesRepo,
             IGenericRepository<Supplier> suppliersRepo,
-            IMapper mappper
+            IMapper mappper,
+
+            //Vaccine
+            VaccineRepository vaccineRepository
         )
         {
             _productsRepo = productsRepo;
@@ -70,6 +78,9 @@ namespace API.Controllers
             _typesRepo = typesRepo;
             _suppliersRepo = suppliersRepo;
             _mapper = mappper;
+
+            //Vaccine
+            _vaccineRepository = vaccineRepository;
         }
 
         [HttpGet]
@@ -81,7 +92,7 @@ namespace API.Controllers
 
         // 2022-03-22 8:53 ------------ MỚI COMMENT -----------
         //public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts
-        public Task<ActionResult> GetProducts
+        public async Task<ActionResult> GetProducts
         (
             //Trước đó
             /*
@@ -94,12 +105,12 @@ namespace API.Controllers
         )
         {
             //---------------THUẦN SQL: KHÔNG ĐƯỢC EDIT-------------
-            
+
             //var products = await _productsRepo.ListAllAsync(); // repo type T
 
             // specification repo type T
             // 2022-03-22 8:53 ------------ MỚI COMMENT -----------
-                //var spec = new ProductsWithTypesStoresSuppliers(/*sort, storeId, typeId, supplierId*/ productPrams); //thay đổi theo Mongo
+            //var spec = new ProductsWithTypesStoresSuppliers(/*sort, storeId, typeId, supplierId*/ productPrams); //thay đổi theo Mongo
 
             // paging count
             // 2022-03-22 8:53 ------------ MỚI COMMENT -----------
@@ -143,12 +154,19 @@ namespace API.Controllers
             //return Ok(new Pagination<ProductToReturnDto>(productPrams.PageIndex, productPrams.PageSize, totalItems, data));
 
             //----------------SƯA THEO MONGODB --------------
-            var client = new MongoClient("mongodb://localhost:27017");
+            /*var client = new MongoClient("mongodb://localhost:27017");
             var db = client.GetDatabase("vnvc-demo");
             var collection = db.GetCollection<BsonDocument>("vaccine-info");
             var result = collection.Find(new BsonDocument()).ToList(); // Lỗi ở đây
+
+            //Test
+            Console.WriteLine(result[0]);
+
+            //ProductToReturnDto -> VaccineToReturnDto*/
+
+            var vaccines = await _vaccineRepository.GetVaccinesAsync();
             
-            return Ok(); // Do Task<ActionResult> -- chưa cần sửa
+            return Ok(new VaccineReponse(productPrams.PageIndex, productPrams.PageSize, 100, vaccines)); // đang test với random pageIndex, pageSize, count
         }
 
         [HttpGet("{id}")]
