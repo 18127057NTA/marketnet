@@ -51,3 +51,7 @@ dotnet ef migrations add <Tên nào khác migrations cũ> -p Infrastructure -s A
 
 setup angular
 - npm install -g @angular/cli@12
+
+docker
+- chạy file setup .yml
+    + docker-compose up --detach
