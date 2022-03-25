@@ -18,6 +18,10 @@ package needed:
     add Core: thêm project Core vào solution (root)
 - dotnet add reference ../Infrastructure (đang ở mức api): thêm chỉ mục csproj và project Infrastructure
 - dotnet restore: để các chỉ mục được đăng ký và ở trạng thái available trong project
+- cài StackExchange.Redis cho project Infrastructure
+    + ctrl + shift + p: Nuget package manager: Add package
+    + StackExchange.Redis -> Chọn StackExchange.Redis
+    + Chọn Infrastructure project
 
 
 extensions needed:
@@ -51,7 +55,14 @@ dotnet ef migrations add <Tên nào khác migrations cũ> -p Infrastructure -s A
 
 setup angular
 - npm install -g @angular/cli@12
+<<<<<<< Updated upstream
 chạy angular
 - ng serve
 
 tải mongodb driver 2.15.0 trên nuget gallery cho project api
+=======
+
+docker
+- chạy file setup .yml
+    + docker-compose up --detach
+>>>>>>> Stashed changes
