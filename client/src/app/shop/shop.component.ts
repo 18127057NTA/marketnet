@@ -12,35 +12,35 @@ import { ShopService } from './shop.service';
 })
 export class ShopComponent implements OnInit {
   //Tìm kiếm
-  @ViewChild('search', {static: false}) searchTerm: ElementRef;
+  @ViewChild('search', { static: false }) searchTerm: ElementRef;
   //Danh sách sản phẩm
   products: IProduct[];
   //Danh sách nhà cung cấp
-  suppliers: ISupplier[];
+  //suppliers: ISupplier[];
   //Loại sản phẩm
-  types: IType[];
+  //types: IType[];
 
   //Paging, Sorting
   shopParams = new ShopParams();
   totalCount: number;
 
-  sortOptions = [
+  /*sortOptions = [
     { name: 'Tự nhiên', value: 'name' },
     { name: 'Giá thấp tới cao', value: 'priceAsc' },
     { name: 'Giá cao tới thấp', value: 'priceDesc' },
-  ];
+  ];*/
 
   constructor(private shopService: ShopService) {}
 
   ngOnInit(): void {
     this.getProducts();
-    this.getSuppliers();
-    this.getTypes();
+    //this.getSuppliers();
+    //this.getTypes();
   }
   //Lấy danh sách sản phẩm
   getProducts() {
     this.shopService
-      // .getProducts(this.supplierIdSelected, this.typeIdSelected, this.sortSelected) //trước đó 
+      // .getProducts(this.supplierIdSelected, this.typeIdSelected, this.sortSelected) //trước đó
       .getProducts(this.shopParams)
       .subscribe(
         (response) => {
@@ -56,6 +56,7 @@ export class ShopComponent implements OnInit {
       );
   }
   //Lấy danh sách nhà cung cấp
+  /*
   getSuppliers() {
     this.shopService.getSuppliers().subscribe(
       (response) => {
@@ -77,8 +78,10 @@ export class ShopComponent implements OnInit {
         console.log(error);
       }
     );
-  }
-  //Lấy danh sách nhà cung cấp
+  }*/
+
+  //Lấy danh sách loại sản phẩm
+  /*
   getTypes() {
     this.shopService.getTypes().subscribe(
       (response) => {
@@ -91,8 +94,8 @@ export class ShopComponent implements OnInit {
         console.log(error);
       }
     );
-  }
-
+  }*/
+  /*
   //Chọn sản phẩm theo nhà cung cấp nào đó
   onSupplierSelected(supplierId: number) {
     this.shopParams.supplierId = supplierId;
@@ -110,22 +113,22 @@ export class ShopComponent implements OnInit {
     this.shopParams.sort = sort;
     this.getProducts();
   }
-  
-  onPageChanged(event: any){
-    if(this.shopParams.pageNumber != event){
+  */
+  onPageChanged(event: any) {
+    if (this.shopParams.pageNumber != event) {
       this.shopParams.pageNumber = event;
       this.getProducts();
     }
   }
 
   //Tìm kiếm
-  onSearch(){
+  onSearch() {
     this.shopParams.search = this.searchTerm.nativeElement.value;
     this.shopParams.pageNumber = 1;
     this.getProducts();
   }
   //Đặt lại
-  onReset(){
+  onReset() {
     this.searchTerm.nativeElement.value = '';
     this.shopParams = new ShopParams();
     this.getProducts();

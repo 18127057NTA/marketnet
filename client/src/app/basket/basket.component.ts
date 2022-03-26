@@ -22,12 +22,12 @@ export class BasketComponent implements OnInit {
   removeBasketItem(item: IBasketItem){
     this.basketService.removeItemFromBasket(item);
   }
-
+  /*
   incrementItemQuantity(item: IBasketItem){
     this.basketService.incrementItemQuantity(item);
   }
 
   decrementItemQuantity(item: IBasketItem){
     this.basketService.decrementItemQuantity(item);
-  }
+  }*/
 }

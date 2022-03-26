@@ -9,7 +9,7 @@ export interface IBasket {
   shippingPrice?: number;
 }
 
-export interface IBasketItem {
+/*export interface IBasketItem {
   id: number;
   productName: string;
   unitPrice: number;
@@ -19,6 +19,16 @@ export interface IBasketItem {
   storeAddress: string;
   typeName: string;
   supplierName: string;
+}*/
+
+export interface IBasketItem {
+  id: string;
+  ten: string;
+  gia: number;
+  soLuongGoi: number;
+  phongBenh: string;
+  tongSoLieu: number;
+  hinhAnh: string;
 }
 
 export class Basket implements IBasket {

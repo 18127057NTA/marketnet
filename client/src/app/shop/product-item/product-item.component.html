@@ -1,8 +1,13 @@
 <div class="card h-100 shadow-sm">
   <div class="image position-relative" style="cursor: pointer">
-    <img
+    <!--<img
       src="{{ product.pictureUrl }}"
       alt="{{ product.name }}"
+      class="img-fluid bg-info"
+    />-->
+    <img
+      src="{{ product.hinhAnh }}"
+      alt="{{ product.ten }}"
       class="img-fluid bg-info"
     />
     <div class="d-flex align-items-center justify-content-center hover-overlay">
@@ -22,9 +27,9 @@
   </div>
   <div class="card-body d-flex flex-column">
     <a routerLink="/shop/{{ product.id }}">
-      <h6 class="text-upppercase">{{ product.name }}</h6>
+      <h6 class="text-upppercase">{{ product.ten }}</h6>
     </a>
-    <span class="mb-2">{{ product.unitPrice | currency: "VND" }}</span>
+    <span class="mb-2">{{ product.gia | currency: "VND" }}</span>
     <span class="mb-2"></span>
     <!--Đơn vị tính chưa thêm-->
   </div>

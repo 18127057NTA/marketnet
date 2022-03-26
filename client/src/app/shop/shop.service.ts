@@ -61,12 +61,15 @@ export class ShopService {
   }
 
   //Lấy danh sách nhà cung cấp
+  /*
   getSuppliers() {
     return this.http.get<ISupplier[]>(this.baseUrl + 'products/suppliers');
-  }
+  }*/
+
   //Lấy danh sách của hàng
   //Lấy danh sách loại sản phẩm
+  /*
   getTypes() {
     return this.http.get<IType[]>(this.baseUrl + 'products/types');
-  }
+  }*/
 }

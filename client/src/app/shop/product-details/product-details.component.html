@@ -2,14 +2,14 @@
   <div class="row" *ngIf="product">
     <div class="col-6">
       <img
-        src="{{ product.pictureUrl }}"
-        alt="{{ product.name }}"
+        src="{{ product.hinhAnh }}"
+        alt="{{ product.ten }}"
         class="img-fluid w-100"
       />
     </div>
     <div class="col-6">
-      <h3>{{ product.name }}</h3>
-      <p style="font-size: 2em">{{ product.unitPrice | currency: "VND" }}</p>
+      <h3>{{ product.ten }}</h3>
+      <p style="font-size: 2em">{{ product.gia | currency: "VND" }}</p>
       <p></p>
       <!--Đơn vị tính chưa thêm-->
       <div class="d-flex justify-content-start align-items-center">
@@ -18,7 +18,7 @@
           class="fa fa-minus-circle text-warning mr-2"
           style="cursor: pointer; font-size: 2em"
         ></i>
-        <span class="font-weight-bold" style="font-size: 1.5em">{{quantity}}</span>
+        <span class="font-weight-bold" style="font-size: 1.5em">{{1}}</span> <!--Thiếu số lượng gói-->
         <i
           (click)="incrementQuantity()"
           class="fa fa-plus-circle text-warning mx-2"
@@ -31,9 +31,11 @@
     </div>
     <div class="row mt-5">
       <div class="col-12 ml-3">
-        <h4>Mô tả sản phẩm</h4>
-        <p></p>
         <!--Mô tả sản phẩm chưa thêm-->
+        <h4>Thông tin mô tả</h4>
+        <p>{{product.moTaThongTin}}</p>
+        <h4>Tổng số liều tiêm</h4>
+        <p>{{product.tongSoLieu}}</p>
       </div>
     </div>
   </div>

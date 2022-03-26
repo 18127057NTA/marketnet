@@ -12,9 +12,31 @@ namespace Core.Entities
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public string Name { get; set; }
-        public string PhongBenh {get; set;}
-        public string MoTaThongTin {get; set;}
+
+        [BsonElement("ten")]
+        [JsonProperty("ten")]
+        public string Ten { get; set; }
+
+        [BsonElement("gia")]
+        [JsonProperty("gia")]
+        public int Gia { get; set; }
+
+        [BsonElement("motathongtin")]
+        [JsonProperty("motathongtin")]
+        public string MoTaThongTin { get; set; }
+
+        [BsonElement("phongbenh")]
+        [JsonProperty("phongbenh")]
+        public string PhongBenh { get; set; }
+
+        [BsonElement("tongsolieu")]
+        [JsonProperty("tongsolieu")]
+
+        public int TongSoLieu { get; set; }
+
+        [BsonElement("hinhanh")]
+        [JsonProperty("hinhanh")]
+        public string HinhAnh { get; set; }
 
     }
 }

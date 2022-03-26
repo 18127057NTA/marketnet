@@ -28,13 +28,14 @@ export class BasketService {
   constructor(private http: HttpClient) {}
 
   createPaymentIntent() {
-    return this.http.post(this.baseUrl + 'payments/' + this.getCurrentBasketValue().id, {})
+    return this.http
+      .post(this.baseUrl + 'payments/' + this.getCurrentBasketValue().id, {})
       .pipe(
         map((basket: IBasket) => {
           this.basketSource.next(basket);
           console.log(this.getCurrentBasketValue());
         })
-      )
+      );
   }
 
   setShippingPrice(deliveryMethod: IDeliveryMethod) {
@@ -81,7 +82,7 @@ export class BasketService {
     basket.items = this.addOrUpdateItem(basket.items, itemToAdd, quant);
     this.setBasket(basket);
   }
-
+  /*
   //Tăng số lượng của một mặt hàng trong giỏ
   incrementItemQuantity(item: IBasketItem) {
     const basket = this.getCurrentBasketValue();
@@ -100,7 +101,7 @@ export class BasketService {
       //Xóa mặt hàng khỏi giỏ
       this.removeItemFromBasket(item);
     }
-  }
+  }*/
   //Xóa mặt hàng khỏi giỏ hàng
   removeItemFromBasket(item: IBasketItem) {
     const basket = this.getCurrentBasketValue();
@@ -144,10 +145,11 @@ export class BasketService {
 
     const index = items.findIndex((i) => i.id === itemToAdd.id);
     if (index === -1) {
-      itemToAdd.quantity = quant;
+      //quantity = soLuongGoi
+      itemToAdd.soLuongGoi = quant;
       items.push(itemToAdd);
     } else {
-      items[index].quantity += quant;
+      items[index].soLuongGoi += quant;
     }
     return items;
   }
@@ -157,7 +159,8 @@ export class BasketService {
     //const shipping = 0;
     const shipping = this.shipping;
     const subtotal = basket.items.reduce(
-      (a, b) => b.unitPrice * b.quantity + a,
+      //gia = unitPrice, soLuongGoi = quantity
+      (a, b) => b.gia * b.soLuongGoi + a,
       0
     );
     const total = subtotal + shipping;
@@ -172,7 +175,7 @@ export class BasketService {
   }
 
   private mapProductToBasketItem(prodct: IProduct, quant: number): IBasketItem {
-    return {
+    /*return {
       id: prodct.id,
       productName: prodct.name,
       unitPrice: prodct.unitPrice,
@@ -182,6 +185,16 @@ export class BasketService {
       storeAddress: prodct.storeAddress,
       typeName: prodct.productType,
       supplierName: prodct.supplierName,
+    };*/
+
+    return {
+      id: prodct.id,
+      ten: prodct.ten,
+      gia: prodct.gia,
+      soLuongGoi: quant,
+      phongBenh: prodct.phongBenh,
+      tongSoLieu: prodct.tongSoLieu,
+      hinhAnh: prodct.hinhAnh,
     };
   }
 }

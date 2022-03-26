@@ -20,5 +20,18 @@ namespace Infrastructure.Data
             var vaccines = await _vaccinesCollection.Find(Builders<Vaccine>.Filter.Empty).ToListAsync();
             return vaccines; // Vướng async chưa cần sửa 
         }
+        public async Task<long> GetVaccinesCountAsync(){
+            return await _vaccinesCollection.CountDocumentsAsync(Builders<Vaccine>.Filter.Empty);
+        }
+
+        public async Task<Vaccine> GetVaccineAsync(string vaccineId){
+            try{
+                return await _vaccinesCollection.Aggregate()
+                    .Match(Builders<Vaccine>.Filter.Eq(x => x.Id, vaccineId)).FirstOrDefaultAsync();
+            }   
+            catch(Exception ex){
+                throw;
+            }
+        }
     }
 }

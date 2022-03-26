@@ -165,8 +165,9 @@ namespace API.Controllers
             //ProductToReturnDto -> VaccineToReturnDto*/
 
             var vaccines = await _vaccineRepository.GetVaccinesAsync();
+            var totalItems = await _vaccineRepository.GetVaccinesCountAsync();
             
-            return Ok(new VaccineReponse(productPrams.PageIndex, productPrams.PageSize, 100, vaccines)); // đang test với random pageIndex, pageSize, count
+            return Ok(new VaccineReponse(productPrams.PageIndex, productPrams.PageSize, totalItems, vaccines)); // đang test với random pageIndex, pageSize, count
         }
 
         [HttpGet("{id}")]
@@ -174,18 +175,22 @@ namespace API.Controllers
         //public async Task<ActionResult<Product>> GetProduct(int id){} // Ban đầu
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
+        // 2022-03-23 11:11 ------------ MỚI COMMENT -----------
+        //public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
+        public async Task<ActionResult> GetProduct(string id)
         {
             //return await _productsRepo.GetByIdAsync(id); // repo type T
 
             //repo type T spec
-            var spec = new ProductsWithTypesStoresSuppliers(id);
+            // 2022-03-23 11:11 ------------ MỚI COMMENT -----------
+            //var spec = new ProductsWithTypesStoresSuppliers(id);
 
             // return không dto
             //return await _productsRepo.GetEntityWithSpec(spec);
 
             // dto
-            var product = await _productsRepo.GetEntityWithSpec(spec);
+            // 2022-03-23 11:11 ------------ MỚI COMMENT -----------
+            //var product = await _productsRepo.GetEntityWithSpec(spec);
 
             //return dto
             /*
@@ -204,11 +209,22 @@ namespace API.Controllers
                 UnitPrice = product.UnitPrice,
                 PictureUrl = product.PictureUrl
             };*/
-            if (product == null) return NotFound(new ApiResponse(404));
+
+            // 2022-03-23 11:11 ------------ MỚI COMMENT -----------
+            //if (product == null) return NotFound(new ApiResponse(404));
+
             //return dto + mapping
-            return _mapper.Map<Product, ProductToReturnDto>(product);
+            // 2022-03-23 11:11 ------------ MỚI COMMENT -----------
+            //return _mapper.Map<Product, ProductToReturnDto>(product);
+
+            var matchedVax = await _vaccineRepository.GetVaccineAsync(id);
+            if(matchedVax == null)
+                return NotFound(new ApiResponse(404));
+            return Ok(new VaccineReponse(matchedVax));
         }
 
+        // 2022-03-23 11:11 ------------ MỚI COMMENT -----------
+        /*
         [HttpGet("stores")]
         public async Task<ActionResult<IReadOnlyList<Store>>> GetStores()
         {
@@ -225,7 +241,7 @@ namespace API.Controllers
         public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
         {
             return Ok(await _typesRepo.ListAllAsync());
-        }
+        }*/
     }
 
 }
