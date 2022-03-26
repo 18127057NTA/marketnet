@@ -30,6 +30,9 @@ namespace API.Helpers
                 .ForMember(d => d.ProductName, o => o.MapFrom(s => s.ItemOrdered.ProductName))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.ItemOrdered.PictureUrl))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
+
+            CreateMap<Vaccine, VaccineToReturnDto>()
+                .ForMember(v => v.HinhAnh, o => o.MapFrom<VaccineUrlResolver>());
         }
     }
 }

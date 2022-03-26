@@ -21,4 +21,5 @@ export interface IProduct {
   phongBenh: string;
   tongSoLieu: number;
   hinhAnh: string;
+  soLuongGoi: number;
 }

@@ -38,5 +38,9 @@ namespace Core.Entities
         [JsonProperty("hinhanh")]
         public string HinhAnh { get; set; }
 
+        [BsonElement("soluonggoi")]
+        [JsonProperty("soluonggoi")]
+        public int SoluongGoi { get; set; }
+
     }
 }

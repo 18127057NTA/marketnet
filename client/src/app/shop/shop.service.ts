@@ -22,6 +22,7 @@ export class ShopService {
     //Tham số trong đường link
     let params = new HttpParams();
 
+    /*
     //Gắn thêm tham số vào đường link
     if (shopParams.supplierId !== 0) {
       params = params.append('supplierId', shopParams.supplierId.toString());
@@ -29,7 +30,7 @@ export class ShopService {
     //Gắn thêm tham số vào đường link
     if (shopParams.typeId !== 0) {
       params = params.append('typeId', shopParams.typeId.toString());
-    }
+    }*/
     //Gắn tham số sort vào đường link
     /*if(shopParams.sort){
       params = params.append('sort', shopParams.sort);
@@ -39,7 +40,7 @@ export class ShopService {
     if (shopParams.search) {
       params = params.append('search', shopParams.search);
     }
-    params = params.append('sort', shopParams.sort);
+    //params = params.append('sort', shopParams.sort);
     params = params.append('pageIndex', shopParams.pageNumber.toString());
     params = params.append('pageSize', shopParams.pageSize.toString()); //pageSize?
 

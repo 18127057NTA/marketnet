@@ -92,7 +92,8 @@ namespace API.Controllers
 
         // 2022-03-22 8:53 ------------ MỚI COMMENT -----------
         //public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts
-        public async Task<ActionResult> GetProducts
+        //public async Task<ActionResult> GetProducts
+        public async Task<ActionResult<Pagination<VaccineToReturnDto>>> GetProducts
         (
             //Trước đó
             /*
@@ -166,8 +167,11 @@ namespace API.Controllers
 
             var vaccines = await _vaccineRepository.GetVaccinesAsync();
             var totalItems = await _vaccineRepository.GetVaccinesCountAsync();
+            //ProductToReturnDto = VaccineReponse
+            var data = _mapper.Map<IReadOnlyList<Vaccine>, IReadOnlyList<VaccineToReturnDto>>(vaccines); //thay đổi theo Mongo
             
-            return Ok(new VaccineReponse(productPrams.PageIndex, productPrams.PageSize, totalItems, vaccines)); // đang test với random pageIndex, pageSize, count
+            //return Ok(new VaccineReponse(productPrams.PageIndex, productPrams.PageSize, totalItems, vaccines)); // đang test với random pageIndex, pageSize, count
+            return Ok(new Pagination<VaccineToReturnDto>(productPrams.PageIndex, productPrams.PageSize, (int)totalItems, data));
         }
 
         [HttpGet("{id}")]
@@ -177,7 +181,8 @@ namespace API.Controllers
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         // 2022-03-23 11:11 ------------ MỚI COMMENT -----------
         //public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
-        public async Task<ActionResult> GetProduct(string id)
+        //public async Task<ActionResult> GetProduct(string id)
+        public async Task<ActionResult<VaccineToReturnDto>> GetProduct(string id)
         {
             //return await _productsRepo.GetByIdAsync(id); // repo type T
 
@@ -220,7 +225,8 @@ namespace API.Controllers
             var matchedVax = await _vaccineRepository.GetVaccineAsync(id);
             if(matchedVax == null)
                 return NotFound(new ApiResponse(404));
-            return Ok(new VaccineReponse(matchedVax));
+            //return Ok(new VaccineReponse(matchedVax));
+            return _mapper.Map<Vaccine, VaccineToReturnDto>(matchedVax);
         }
 
         // 2022-03-23 11:11 ------------ MỚI COMMENT -----------

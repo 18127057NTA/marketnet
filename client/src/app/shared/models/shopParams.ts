@@ -7,7 +7,7 @@ export class ShopParams {
   sort= 'name';
   //Paging
   pageNumber = 1;
-  pageSize = 6;
+  pageSize = 1000;
   
   //Tìm kiếm
   search: string;
