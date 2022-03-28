@@ -57,7 +57,8 @@ export class ShopService {
       );
   }
   //Lấy chi tiết sản phẩm
-  getProduct(id: number) {
+  //Trước đó id: number
+  getProduct(id: string) {
     return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
   }
 

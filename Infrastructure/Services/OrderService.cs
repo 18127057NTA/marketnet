@@ -42,22 +42,22 @@ namespace Infrastructure.Services
                     productItem.Name,
                     productItem.PictureUrl
                 );
-                var orderItem = new OrderItem(itemOrdered, productItem.UnitPrice, item.Quantity);
+                var orderItem = new OrderItem(itemOrdered, productItem.UnitPrice, item.SoLuongGoi);
                 items.Add(orderItem);
             }
 
             // get delivery method from repo
-            var deliveryMethod = await _unitOfWork
+            /*var deliveryMethod = await _unitOfWork
                 .Repository<DeliveryMethod>()
-                .GetByIdAsync(delieveryMethodId);
+                .GetByIdAsync(delieveryMethodId);*/
 
             // calc subtotal
             var subtotal = items.Sum(item => item.Price * item.Quantity);
 
 
             // check to see if order exists
-            var spec = new OrderByPaymentIntentWithItemsSpecification(basket.PaymentIntentId);
-            var existingOrder = await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+            //var spec = new OrderByPaymentIntentWithItemsSpecification(basket.PaymentIntentId);
+            //var existingOrder = await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
 
             // create order
             var order = new Order(
@@ -65,17 +65,17 @@ namespace Infrastructure.Services
                 buyerEmail,
                 buyerPhone,
                 shippingAddress,
-                deliveryMethod,
-                subtotal,
-                basket.PaymentIntentId
+                //deliveryMethod,
+                subtotal
+                //basket.PaymentIntentId
             );
             _unitOfWork.Repository<Order>().Add(order);
 
-            if (existingOrder != null)
+            /*if (existingOrder != null)
             {
                 _unitOfWork.Repository<Order>().Delete(existingOrder);
                 await _paymentService.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
-            }
+            }*/
 
             // TODO: save to db
             var result = await _unitOfWork.Complete();

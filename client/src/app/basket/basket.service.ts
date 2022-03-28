@@ -23,7 +23,7 @@ export class BasketService {
   private basketTotalSource = new BehaviorSubject<IBasketTotals>(null);
   basketTotal$ = this.basketTotalSource.asObservable();
 
-  shipping = 0;
+  //shipping = 0;
 
   constructor(private http: HttpClient) {}
 
@@ -39,10 +39,10 @@ export class BasketService {
   }
 
   setShippingPrice(deliveryMethod: IDeliveryMethod) {
-    this.shipping = deliveryMethod.price;
+    //this.shipping = deliveryMethod.price;
     const basket = this.getCurrentBasketValue();
-    basket.deliveryMethodId = deliveryMethod.id;
-    basket.shippingPrice = deliveryMethod.price;
+    //basket.deliveryMethodId = deliveryMethod.id;
+    //basket.shippingPrice = deliveryMethod.price;
     this.calculaTotals();
     this.setBasket(basket);
   }
@@ -51,7 +51,7 @@ export class BasketService {
     return this.http.get(this.baseUrl + 'basket?id=' + id).pipe(
       map((basket: IBasket) => {
         this.basketSource.next(basket);
-        this.shipping = basket.shippingPrice;
+        //this.shipping = basket.shippingPrice;
         //console.log(this.getCurrentBasketValue());
         this.calculaTotals();
       })
@@ -62,7 +62,7 @@ export class BasketService {
     return this.http.post(this.baseUrl + 'basket', basket).subscribe(
       (response: IBasket) => {
         this.basketSource.next(response);
-        //console.log(response);
+        console.log(response);
         this.calculaTotals();
       },
       (error) => {
@@ -82,12 +82,12 @@ export class BasketService {
     basket.items = this.addOrUpdateItem(basket.items, itemToAdd, quant);
     this.setBasket(basket);
   }
-  /*
+  
   //Tăng số lượng của một mặt hàng trong giỏ
   incrementItemQuantity(item: IBasketItem) {
     const basket = this.getCurrentBasketValue();
     const foundItemIndex = basket.items.findIndex((x) => x.id === item.id);
-    basket.items[foundItemIndex].quantity++;
+    basket.items[foundItemIndex].soLuongGoi++;
     this.setBasket(basket);
   }
   //Giảm số lượng của một mặt hàng trong giỏ
@@ -95,13 +95,13 @@ export class BasketService {
     const basket = this.getCurrentBasketValue();
     const foundItemIndex = basket.items.findIndex((x) => x.id === item.id);
 
-    if (basket.items[foundItemIndex].quantity > 1) {
-      basket.items[foundItemIndex].quantity--;
+    if (basket.items[foundItemIndex].soLuongGoi > 1) {
+      basket.items[foundItemIndex].soLuongGoi--;
     } else {
       //Xóa mặt hàng khỏi giỏ
       this.removeItemFromBasket(item);
     }
-  }*/
+  }
   //Xóa mặt hàng khỏi giỏ hàng
   removeItemFromBasket(item: IBasketItem) {
     const basket = this.getCurrentBasketValue();
@@ -157,14 +157,14 @@ export class BasketService {
   private calculaTotals() {
     const basket = this.getCurrentBasketValue();
     //const shipping = 0;
-    const shipping = this.shipping;
+    //const shipping = this.shipping;
     const subtotal = basket.items.reduce(
       //gia = unitPrice, soLuongGoi = quantity
       (a, b) => b.gia * b.soLuongGoi + a,
       0
     );
-    const total = subtotal + shipping;
-    this.basketTotalSource.next({ shipping, total, subtotal });
+    const total = subtotal; // Trước đó const total = subtotal + shipping;
+    this.basketTotalSource.next({ total, subtotal }); // Trước đó { shipping, total, subtotal }
   }
 
   private createBasket(): IBasket {
@@ -192,8 +192,6 @@ export class BasketService {
       ten: prodct.ten,
       gia: prodct.gia,
       soLuongGoi: quant,
-      phongBenh: prodct.phongBenh,
-      tongSoLieu: prodct.tongSoLieu,
       hinhAnh: prodct.hinhAnh,
     };
   }

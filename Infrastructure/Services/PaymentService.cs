@@ -23,30 +23,30 @@ namespace Infrastructure.Services
 
         public async Task<BuyerBasket> CreateOrUpdatePaymentIntent(string basketId)
         {
-            StripeConfiguration.ApiKey = _config["StripeSettings:SecretKey"];
+            //StripeConfiguration.ApiKey = _config["StripeSettings:SecretKey"];
 
             var basket = await _basketRepository.GetBasketAsync(basketId);
 
             if (basket == null) return null;
 
-            var shippingPrice = 0m;
+            //var shippingPrice = 0m;
 
-            if (basket.DeliveryMethodId.HasValue)
+            /*if (basket.DeliveryMethodId.HasValue)
             {
                 var deliveryMethod = await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync((int)basket.DeliveryMethodId);
                 shippingPrice = deliveryMethod.Price;
-            }
+            }*/
 
-            foreach (var item in basket.Items)
+            /*foreach (var item in basket.Items)
             {
                 var productItem = await _unitOfWork.Repository<Product>().GetByIdAsync(item.Id);
                 if (item.UnitPrice != productItem.UnitPrice)
                 {
                     item.UnitPrice = productItem.UnitPrice;
                 }
-            }
+            }*/
 
-            var service = new PaymentIntentService();
+            /*var service = new PaymentIntentService();
 
             PaymentIntent intent;
 
@@ -54,7 +54,8 @@ namespace Infrastructure.Services
             {
                 var options = new PaymentIntentCreateOptions
                 {
-                    Amount = (long)basket.Items.Sum(i => i.Quantity * (i.UnitPrice * 100)) + (long)shippingPrice * 100,
+                    //Amount = (long)basket.Items.Sum(i => i.Quantity * (i.UnitPrice * 100)) + (long)shippingPrice * 100,
+                    Amount = (long)basket.Items.Sum(i => i.SoLuongGoi * i.Gia),
                     Currency = "usd", // Currency = "usd"
                     PaymentMethodTypes = new List<string> { "card" }
                 };
@@ -71,7 +72,7 @@ namespace Infrastructure.Services
                 await service.UpdateAsync(basket.PaymentIntentId, options);
             }
 
-            await _basketRepository.UpdateBasketAsync(basket);
+            await _basketRepository.UpdateBasketAsync(basket);*/
 
             return basket;
         }

@@ -4,7 +4,6 @@ using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver;
 using StackExchange.Redis;
 
 namespace API

@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace API.Dtos
 {
     public class VaccineToReturnDto
@@ -15,6 +10,5 @@ namespace API.Dtos
         public string PhongBenh {get; set;}
         public int TongSoLieu {get; set;}
         public string HinhAnh {get; set;}
-        public int SoluongGoi {get; set;}
     }
 }

@@ -43,7 +43,7 @@ export class ProductDetailsComponent implements OnInit {
   //Tải chi tiết sản phẩm lên
   loadProduct() {
     this.shopService
-      .getProduct(+this.activatedRoute.snapshot.paramMap.get('id'))
+      .getProduct(this.activatedRoute.snapshot.paramMap.get('id')) // Trước đó: +this.activatedRoute.snapshot.paramMap.get('id')
       .subscribe(
         (product) => {
           this.product = product;

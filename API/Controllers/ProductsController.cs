@@ -3,14 +3,10 @@ using API.Errors;
 using API.Helpers;
 using AutoMapper;
 using Core.Entities;
-using Core.Entities.Responses;
 using Core.Interfaces;
 using Core.Specifications;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
-using MongoDB.Driver;
-
 
 namespace API.Controllers
 {

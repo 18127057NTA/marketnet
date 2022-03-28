@@ -11,18 +11,18 @@ namespace Core.Entities.OrderAggregate
             string buyerEmail,
             string buyerPhone,
             Address shipToAddress,
-            DeliveryMethod deliveryMethod,
-            int subtotal, // decimal ?
-            string paymentIntentId
+            //DeliveryMethod deliveryMethod,
+            int subtotal // decimal ?
+            //string paymentIntentId
         )
         {
             BuyerEmail = buyerEmail;
             BuyerPhone = buyerPhone;
             ShipToAddress = shipToAddress;
-            DeliveryMethod = deliveryMethod;
+            //DeliveryMethod = deliveryMethod;
             OrderItems = orderItems;
             Subtotal = subtotal;
-            PaymentIntentId = paymentIntentId;
+            //PaymentIntentId = paymentIntentId;
         }
 
         public string BuyerEmail { get; set; }
@@ -33,7 +33,7 @@ namespace Core.Entities.OrderAggregate
         public IReadOnlyList<OrderItem> OrderItems { get; set; }
         public int Subtotal { get; set; } // decimal
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
-        public string PaymentIntentId { get; set; }
+        //public string PaymentIntentId { get; set; }
 
         public int GetTotal() // decimal ?
         {
