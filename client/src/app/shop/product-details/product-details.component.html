@@ -39,22 +39,6 @@
       <div class="col-12 ml-3">
         <!--Mô tả sản phẩm chưa thêm-->
         <h4>Thông tin mô tả</h4>
-        <script
-          type="text/javascript"
-          src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"
-        >
-          var app = angular.module("app", []);
-          app.controller("ctrl", function($scope, $sce){
-            $scope.contnt = $sce.trustAsHtml(product.moTaThongTin);
-          });
-        </script>
-        <script
-          type="text/javascript"
-          src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"
-        ></script>
-        <div ng-app="app" ng-controller="ctrl">
-          <p ng-bind-html="contnt"></p>
-        </div>
         <div [innerHtml]="product.moTaThongTin"></div>
         <!--<p>{{ product.moTaThongTin }}</p>-->
         <h4>Tổng số liều tiêm</h4>

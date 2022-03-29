@@ -66,3 +66,5 @@ docker
 - chạy file setup .yml
     + docker-compose up --detach
 >>>>>>> Stashed changes
+
+Nhúng html string vào component trong angular: https://reactgo.com/angular-render-html/
