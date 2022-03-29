@@ -17,7 +17,7 @@ export interface IProduct {
   id: string;
   ten: string;
   gia: number;
-  moTaThongTin: string;
+  moTaThongTin: string; // string
   phongBenh: string;
   tongSoLieu: number;
   hinhAnh: string;

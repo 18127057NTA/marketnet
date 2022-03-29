@@ -4,6 +4,7 @@ import { IProduct } from 'src/app/shared/models/product';
 import { ShopService } from '../shop.service';
 import { BreadcrumbService } from 'xng-breadcrumb';
 import { BasketService } from 'src/app/basket/basket.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-details',
@@ -18,7 +19,8 @@ export class ProductDetailsComponent implements OnInit {
     private shopService: ShopService,
     private activatedRoute: ActivatedRoute,
     private bcService: BreadcrumbService,
-    private basketService: BasketService
+    private basketService: BasketService,
+    private sanitizer:DomSanitizer
   ) {
     this.bcService.set('@productDetails', ' ');
   }
@@ -47,6 +49,7 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe(
         (product) => {
           this.product = product;
+          //this.product.moTaThongTin = this.sanitizer.bypassSecurityTrustHtml(product.moTaThongTin);
           this.bcService.set('@productDetails', product.ten); //product.name
         },
         (error) => {
