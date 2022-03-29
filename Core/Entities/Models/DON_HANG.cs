@@ -13,6 +13,9 @@ namespace Core.Entities.Models
         public string DH_IDCN {get; set;}
         public int DH_IDKH {get; set;}
         public DateTime DH_NGAY {get; set;}
+        public DateTime DH_NGAYTIEM {get; set;}
+        public int DH_TONGTIEN {get; set;}
+        public string DH_TTRANG {get; set;}
 
     }
 }
