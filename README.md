@@ -43,6 +43,23 @@ thao tác sql lite
 - dotnet ef database drop -p Infrastructure -s API: chuyển db từ project api sang project infrasture
 - dotnet ef migrations remove -p Infrastruture -s API: xóa migrations ở api và bỏ sang infrastructure (đây chỉ là entity - ko phải dữ liệu)
 - dotnet ef migrations add InitialCreate -p Infrastructure -s API -o Data/Migrations: thêm migrations vào infrastruture/data/migrations
+- dotnet ef migrations add InitialCreate(Có thể đặt tên khác) -p Infrastructure -s API -c <Tên của class Context> -o <Tên folder ms trong Infra>/Migrations
+- dotnet ef database update -p Infrastructure -s API: update db(tất tả?) theo migration hiện có
+- dotnet ef database update --context <Tên context> -p Infrastructure -s API
+  --connection <CONNECTION>              The connection string to the database. Defaults to the one specified in AddDbContext or OnConfiguring.
+  -c|--context <DBCONTEXT>               The DbContext to use. // CHỌN CONTEXT CỤ THỂ
+  -p|--project <PROJECT>                 The project to use. Defaults to the current working directory.
+  -s|--startup-project <PROJECT>         The startup project to use. Defaults to the current working directory.
+  --framework <FRAMEWORK>                The target framework. Defaults to the first one in the project.
+  --configuration <CONFIGURATION>        The configuration to use.
+  --runtime <RUNTIME_IDENTIFIER>         The runtime to use.
+  --msbuildprojectextensionspath <PATH>  The MSBuild project extensions path. Defaults to "obj".
+  --no-build                             Don't build the project. Intended to be used when the build is up-to-date.
+  -h|--help                              Show help information
+  -v|--verbose                           Show verbose output.
+  --no-color                             Don't colorize output.
+  --prefix-output                        Prefix output with level.
+
 - Điều chỉnh migrations:
 
 Chú ý: https://stackoverflow.com/questions/52311053/more-than-one-dbcontext-was-found
@@ -50,7 +67,7 @@ Chú ý: https://stackoverflow.com/questions/52311053/more-than-one-dbcontext-wa
 khi clone mới lại project:
 - xóa hết file trong Infrastructure/Data/Migration
 - dotnet ef database drop --StoreContext -p Infrastructure -s API
-dotnet ef migrations add <Tên nào khác migrations cũ> -p Infrastructure -s API -o Data/Migrations
+dotnet ef migrations add <Tên nào khác migrations cũ> -p Infrastructure -s API -o {Tên folder có thể cũ hoặc tạo mới}/Migrations
 - chạy lại api
 
 setup angular

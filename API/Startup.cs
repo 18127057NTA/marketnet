@@ -33,12 +33,16 @@ namespace API
             //Sqlite
             services.AddDbContext<StoreContext>(
                 x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
+            //Vax context
+            services.AddDbContext<VNVCContext>(x => x.UseSqlite(_config.GetConnectionString("VaxDbConnection")));
 
             //Nhận dạng người dùng
             services.AddDbContext<AppIdentityDbContext>(
-                x => { 
-                    x.UseSqlite(_config.GetConnectionString("IdentityConnection")); 
+                x =>
+                {
+                    x.UseSqlite(_config.GetConnectionString("IdentityConnection"));
                 });
+
             //SqlServer
             //services.AddDbContext<StoreContext>(
             //  x => x.UseSqlServer(_config.GetConnectionString("SqlServer")));
