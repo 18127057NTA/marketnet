@@ -22,8 +22,8 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.createCheckoutForm();
-    this.getAddressFormValues();
-    this.getDeliveryMethodValue();
+    //this.getAddressFormValues();
+    //this.getDeliveryMethodValue();
     this.basketTotals$ = this.basketService.basketTotal$;
   }
 

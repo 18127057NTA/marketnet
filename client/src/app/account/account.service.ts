@@ -29,7 +29,7 @@ export class AccountService {
     return this.http.get(this.baseUrl + 'account', { headers }).pipe(
       map((user: IUser) => {
         if (user) {
-          localStorage.setItem('token', user.token);
+          //localStorage.setItem('token', user.token);
           this.currentUserSource.next(user);
         }
       })
@@ -39,19 +39,20 @@ export class AccountService {
   login(values: any) {
     return this.http.post(this.baseUrl + 'account/login', values).pipe(
       map((user: IUser) => {
-        localStorage.setItem('token', user.token);
+        //localStorage.setItem('token', user.token);
         this.currentUserSource.next(user);
       })
     );
   }
 
   register(values: any) {
-    return this.http.post(this.baseUrl + 'account/register', values).pipe(
+    /*return this.http.post(this.baseUrl + 'account/register', values).pipe(
       map((user: IUser) => {
         localStorage.setItem('token', user.token);
         this.currentUserSource.next(user);
       })
-    );
+    );*/
+    return this.http.post(this.baseUrl + 'account/register', values);
   }
 
   logout() {

@@ -18,7 +18,7 @@
       >Trang chủ</a
     >
     <a class="p-2" routerLink="/shop" routerLinkActive="active">Cửa hàng</a>
-    <a class="p-2" routerLink="/test-error" routerLinkActive="active">Lỗi</a>
+    <!--<a class="p-2" routerLink="/test-error" routerLinkActive="active">Lỗi</a>-->
   </nav>
   <!--Class để chứa button-->
   <div class="d-flex align-items-center">
@@ -42,7 +42,7 @@
         routerLink="/account/register"
         class="btn btn-outline-secondary mr-3"
         href="#"
-        >Đăng ký</a
+        >Đăng ký mũi tiêm(khách hàng không thân thiết)</a
       >
     </ng-container>
     <ng-container *ngIf="currentUser$ | async as user">

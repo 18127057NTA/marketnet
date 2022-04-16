@@ -171,6 +171,8 @@ export class BasketService {
     const basket = new Basket();
     localStorage.setItem('basket_id', basket.id);
 
+    //Tạo danh sách người tiêm có mã giỏ hàng
+
     return basket;
   }
 

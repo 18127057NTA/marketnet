@@ -13,6 +13,7 @@ namespace API.Extensions
                 return new MongoClient(uri);
             });
             servicesBuilder.AddSingleton<VaccineRepository>();
+            servicesBuilder.AddSingleton<NgTiemRepository>();
 
             return servicesBuilder;
         }

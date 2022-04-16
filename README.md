@@ -85,3 +85,10 @@ docker
 >>>>>>> Stashed changes
 
 Nhúng html string vào component trong angular: https://reactgo.com/angular-render-html/
+
+REGEX để filter input trong client
+https://www.regexlib.com/Default.aspx
+
+Id để null vẫn tự generate (mongodb)
+https://stackoverflow.com/questions/42349063/use-objectid-generatenewid-or-leave-mongodb-to-create-one
+
