@@ -1,6 +1,6 @@
 <div class="mt-4" [formGroup]="checkoutForm">
   <div class="d-flex justify-content-between align-items-center">
-    <h4>Địa chỉ giao hàng</h4>
+    <h4>Thông tin người mua</h4>
     <button
       (click)="saveUserAddress()"
       class="btn btn-outline-success mb-3"
@@ -9,58 +9,61 @@
         !checkoutForm.get('addressForm').dirty
       "
     >
-      Đặt làm địa chỉ mặc định
+      Đặt làm thông tin mặc định
     </button>
   </div>
   <div class="row" formGroupName="addressForm">
     <div class="form-group col-6">
       <app-text-input
-        [label]="'Tên'"
-        formControlName="firstName"
+        [label]="'Họ Tên'"
+        formControlName="hoTen"
       ></app-text-input>
     </div>
     <div class="form-group col-6">
       <app-text-input
-        [label]="'Họ'"
-        formControlName="lastName"
+        [label]="'Số điện thoại'"
+        formControlName="sdt"
       ></app-text-input>
     </div>
     <div class="form-group col-6">
       <app-text-input
-        [label]="'Đường'"
-        formControlName="street"
+        [label]="'Email'"
+        formControlName="email"
       ></app-text-input>
     </div>
     <div class="form-group col-6">
       <app-text-input
-        [label]="'Phường'"
-        formControlName="ward"
+        [label]="'CCCD/CMND/PASSPORT'"
+        formControlName="cccd"
       ></app-text-input>
     </div>
+    
     <div class="form-group col-6">
       <app-text-input
-        [label]="'Quận'"
+        [label]="'Địa chỉ'"
         formControlName="district"
       ></app-text-input>
     </div>
     <div class="form-group col-6">
       <app-text-input
-        [label]="'Thành phố'"
-        formControlName="city"
+        [label]="'Tỉnh thành nơi tiêm'"
+        formControlName="tinhThanhTiem"
       ></app-text-input>
     </div>
     <div class="form-group col-6">
       <app-text-input
-        [label]="'Tỉnh'"
-        formControlName="province"
+        [label]="'Chi nhánh nơi tiêm'"
+        formControlName="chiNhanhTiem"
       ></app-text-input>
     </div>
+  <!--
     <div class="form-group col-6">
       <app-text-input
         [label]="'Zip code'"
         formControlName="zipCode"
       ></app-text-input>
     </div>
+  -->
   </div>
 </div>
 

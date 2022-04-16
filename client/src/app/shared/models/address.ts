@@ -1,4 +1,4 @@
-export interface IAddress {
+/*export interface IAddress {
     firstName: string;
     lastName: string;
     street: string;
@@ -7,4 +7,14 @@ export interface IAddress {
     city: string;
     provice: string;
     zipCode: string;
+}
+*/
+export interface IAddress {
+  hoTen: string;
+  sdt: string;
+  email: string;
+  cccd: string;
+  diaChi: string;
+  tinhThanhTiem: string;
+  chiNhanhTiem: string;
 }

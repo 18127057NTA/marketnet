@@ -19,7 +19,7 @@ export class CheckoutAddressComponent implements OnInit {
 
   saveUserAddress() {
     this.accountService.updateUserAddress(this.checkoutForm.get('addressForm').value).subscribe(() => {
-      this.toastr.success('Địa chỉ đã được lưu!');
+      this.toastr.success('Thông tin đã được lưu!');
     }, error => {
       this.toastr.error(error.message);
       console.log(error);

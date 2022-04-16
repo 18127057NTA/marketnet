@@ -29,7 +29,7 @@ export class CheckoutComponent implements OnInit {
 
   createCheckoutForm() {
     this.checkoutForm = this.fb.group({
-      addressForm: this.fb.group({
+      /*addressForm: this.fb.group({
         firstName: [null, Validators.required],
         lastName: [null, Validators.required],
         street: [null, Validators.required],
@@ -38,6 +38,15 @@ export class CheckoutComponent implements OnInit {
         city: [null, Validators.required],
         province: [null, Validators.required],
         zipCode: [null, Validators.required],
+      }),*/
+      addressForm: this.fb.group({
+        hoTen: [null, Validators.required],
+        sdt: [null, Validators.required],
+        email: [null, Validators.required],
+        cccd: [null, Validators.required],
+        diaChi: [null, Validators.required],
+        tinhThanhTiem: [null, Validators.required],
+        chiNhanhTiem: [null, Validators.required]
       }),
       deliveryForm: this.fb.group({
         deliveryMethod: [null, Validators.required],
