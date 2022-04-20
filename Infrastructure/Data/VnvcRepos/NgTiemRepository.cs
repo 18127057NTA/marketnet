@@ -3,7 +3,7 @@ using Core.Entities.VNVCModels;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Infrastructure.Data
+namespace Infrastructure.Data.VnvcRepos
 {
     public class NgTiemRepository
     {

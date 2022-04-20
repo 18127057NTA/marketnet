@@ -37,14 +37,14 @@
         formControlName="cccd"
       ></app-text-input>
     </div>
-    
+
     <div class="form-group col-6">
       <app-text-input
         [label]="'Địa chỉ'"
-        formControlName="district"
+        formControlName="diaChi"
       ></app-text-input>
     </div>
-    <div class="form-group col-6">
+    <!--<div class="form-group col-6">
       <app-text-input
         [label]="'Tỉnh thành nơi tiêm'"
         formControlName="tinhThanhTiem"
@@ -55,16 +55,36 @@
         [label]="'Chi nhánh nơi tiêm'"
         formControlName="chiNhanhTiem"
       ></app-text-input>
+    </div>-->
+    <div class="form-group col-6">
+      <label>Tỉnh thành nơi tiêm</label>
+      <br />
+      <select formControlName="tinhThanhTiem">
+        <!--<option>Chọn tỉnh thành</option>-->
+        <option *ngFor="let tt of tinhThanhList" value="{{ tt.id }}">
+          {{ tt.tenTinhThanh }}
+        </option>
+      </select>
     </div>
-  <!--
+    <div class="form-group col-6">
+      <label>Chi nhánh tiêm</label>
+      <br />
+      <select formControlName="chiNhanhTiem">
+        <!--<option>Chọn tỉnh thành</option>-->
+        <option *ngFor="let cn of chiNhanhList" value="{{ cn.id }}">
+          {{ cn.tenChiNhanh }} ({{ cn.tenTinhThanh }})
+        </option>
+      </select>
+    </div>
+
+    <!--
     <div class="form-group col-6">
       <app-text-input
         [label]="'Zip code'"
         formControlName="zipCode"
       ></app-text-input>
     </div>
-  -->
-  </div>
+  --></div>
 </div>
 
 <div
@@ -78,6 +98,6 @@
     class="btn btn-primary"
     cdkStepperNext
   >
-    Tới giao hàng <i class="fa fa-angle-right"></i>
+    Tới tổng kết <i class="fa fa-angle-right"></i>
   </button>
 </div>

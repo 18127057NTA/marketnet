@@ -26,6 +26,7 @@ namespace API.Extensions
 
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
 
+            //MAPPING NÀY RẤT QUAN TRỌNG ĐỂ CHUYỂN SANG DTO VÀ NGƯỢC LẠI - KHÔNG ĐƯỢC THIẾU - KIỂM TRA THÊM DEPENDENCIES
             services.AddAutoMapper(typeof(MappingProfiles));
 
              services.Configure<ApiBehaviorOptions>(options =>

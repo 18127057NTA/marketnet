@@ -15,6 +15,7 @@ export interface IAddress {
   email: string;
   cccd: string;
   diaChi: string;
-  tinhThanhTiem: string;
+  tinhThanhTiem: number;
   chiNhanhTiem: string;
+  maGiohang: string;
 }

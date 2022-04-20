@@ -92,3 +92,17 @@ https://www.regexlib.com/Default.aspx
 Id để null vẫn tự generate (mongodb)
 https://stackoverflow.com/questions/42349063/use-objectid-generatenewid-or-leave-mongodb-to-create-one
 
+thêm dropdown menu trong angular:
+ + https://stackoverflow.com/questions/68329468/angular-12-select-dropdown-option-based-on-the-value-in-template
+ + https://stackoverflow.com/questions/34736161/create-a-dropdown-component
+
+autoincremt primary key in EF:
+https://stackoverflow.com/questions/61119828/auto-increment-primary-key-with-entity-framework
+
+update entity(row):
+https://entityframework.net/knowledge-base/46657813/how-to-update-record-using-entity-framework-core-
+https://stackoverflow.com/questions/7149943/entity-framework-update-a-row-in-a-table
+https://stackoverflow.com/questions/28932621/best-way-to-update-an-entity-in-entity-framework
+
+chú ý về primary tự tăng:
+https://stackoverflow.com/questions/61119828/auto-increment-primary-key-with-entity-framework

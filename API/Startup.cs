@@ -1,7 +1,8 @@
 using API.Extensions;
 using API.Middleware;
-using Core.Interfaces;
+using Core.Interfaces.VnvcInterfaces;
 using Infrastructure.Data;
+using Infrastructure.Data.VnvcRepos;
 using Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
@@ -48,7 +49,9 @@ namespace API
             //  x => x.UseSqlServer(_config.GetConnectionString("SqlServer")));
 
             //Repo
-            services.AddScoped<IProductRepository, ProductRepository>();
+            //services.AddScoped<IProductRepository, ProductRepository>();
+            // REPO VNVC SQL
+            services.AddScoped<IVnvcRDbRepository, VnvcRDbRepository>();
 
             //Extension
             services.AddApplicationServices();

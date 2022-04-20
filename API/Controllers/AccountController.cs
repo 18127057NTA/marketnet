@@ -6,7 +6,7 @@ using AutoMapper;
 using Core.Entities.Identity;
 using Core.Entities.VNVCModels;
 using Core.Interfaces;
-using Infrastructure.Data;
+using Infrastructure.Data.VnvcRepos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -22,13 +22,25 @@ namespace API.Controllers
 
         //Người tiêm và danh sách tiểm
         private readonly NgTiemRepository _ngTiemRepository;
+        //Mã đặt mua
+        private readonly MaDatMuaRepository _mdmRepository;
+        //Repo khách hàng sql
+        //Repo tỉnh
+        //Repo chi nhánh
+        //Tất cả 3 cái trên vô 1 cái repo
+        private readonly VnvcRDbRepository _vnvcRDbRepository;
 
         public AccountController(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             ITokenService tokenService,
             IMapper mapper,
-            NgTiemRepository ngTiemRepo
+            //Người tiêm repo
+            NgTiemRepository ngTiemRepo,
+            //Vnvc sql repo
+            VnvcRDbRepository vnvcRDbRepo,
+            //Mã đặt mua repo
+            MaDatMuaRepository mdmRepo
         )
         {
             _signInManager = signInManager;
@@ -36,6 +48,8 @@ namespace API.Controllers
             _tokenService = tokenService;
             _mapper = mapper;
             _ngTiemRepository = ngTiemRepo;
+            _vnvcRDbRepository = vnvcRDbRepo;
+            _mdmRepository = mdmRepo;
         }
 
         //[Authorize]
@@ -75,6 +89,7 @@ namespace API.Controllers
             return await _ngTiemRepository.GetNgTiemAsync(sodienthoai) != null;
         }
 
+
         //[Authorize]
         [HttpGet("address")]
         public async Task<ActionResult<AddressDto>> GetUserAddress()
@@ -86,9 +101,11 @@ namespace API.Controllers
             //return user.Address;
             return _mapper.Map<Address, AddressDto>(user.Address);
         }
+
+        //Cập nhật / Nhập thông tin người đặt mua vaccine
         //[Authorize]
         [HttpPut("address")]
-        public async Task<ActionResult<AddressDto>> UpdateUserAddress(AddressDto address)
+        /*public async Task<ActionResult<AddressDto>> UpdateUserAddress(AddressDto address)
         {
             var user = await _userManager.FindUserByClaimsPrincipleWithAddressAsync(HttpContext.User);
             user.Address = _mapper.Map<AddressDto, Address>(address);
@@ -98,6 +115,53 @@ namespace API.Controllers
             if (result.Succeeded) return Ok(_mapper.Map<Address, AddressDto>(user.Address));
 
             return BadRequest("Problem updating the user");
+        }*/
+        public async Task<ActionResult<ThongTinNguoiMuaDto>> UpdateUserAddress(ThongTinNguoiMuaDto ttnguoimua)
+        {
+            var khMoi = new KHACH_HANG
+            {
+                KH_HOTEN = ttnguoimua.HoTen,
+                KH_CCCD = ttnguoimua.Cccd,
+                KH_SDT = ttnguoimua.Sdt,
+                KH_EMAIL = ttnguoimua.Email,
+                KH_DIACHI = ttnguoimua.DiaChi
+            };
+            //Kiểm tra người mua đã tồn tại hay chưa?
+            var user = await _vnvcRDbRepository.GetNgMuaTheoCccdAsync(khMoi.KH_CCCD);
+            //Nếu user đã tồn tại
+            if (user != null)
+            {
+                //Lấy mã khách hàng
+                khMoi.Id = user.Id;
+                //Cập nhật số điện thoại người mua nếu có thay đổi
+                if (user.KH_SDT != khMoi.KH_SDT)
+                {
+                    await _vnvcRDbRepository.UpdateNgMuaBySdt(khMoi.KH_CCCD, khMoi.KH_SDT);
+                }
+                var mDMMoi = new MaDatMua
+                {
+                    MaKH = user.Id,
+                    MaGioHang = ttnguoimua.MaGioHang,
+                    SdtKH = ttnguoimua.Sdt
+                };
+                await _mdmRepository.CreateMDMAsync(mDMMoi);
+            }
+            else
+            {
+                //Thêm khách hàng mới
+                //Id của khách hàng mới đang bằng null -> nếu insert bị lỗi -> select count và + 1 sau đó gán vào id
+                var khTaoMoi = await _vnvcRDbRepository.CreateNgMuaAsync(khMoi);
+                //Tạo document mới trong ma-dat-mua
+                var mDMMoi = new MaDatMua
+                {
+                    MaKH = khTaoMoi.Id,
+                    MaGioHang = ttnguoimua.MaGioHang,
+                    SdtKH = ttnguoimua.Sdt
+                };
+                await _mdmRepository.CreateMDMAsync(mDMMoi);
+            }
+            //Trả về thông tin người mua kèm mã giỏ hàng
+            return ttnguoimua;
         }
 
         [HttpPost("login")]
@@ -120,6 +184,7 @@ namespace API.Controllers
                 DisplayName = user.DisplayName
             };
         }
+        //Đăng ký người tiêm
         [HttpPost("register")]
         //public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto) //registerDto phải map vs form group
         public async Task<ActionResult<NgTiemToReturnDto>> Register(NgTiemDto ngtiemDto)
@@ -167,7 +232,7 @@ namespace API.Controllers
             var dsNgTiemHienTai = _ngTiemRepository.GetDsNgTiemAsync(ngtiemDto.MaGioHang).Result;
             var ngTiemHienTai = _ngTiemRepository.GetNgTiemAsync(ngtiemDto.SoDienThoai).Result;
 
-            if(dsNgTiemHienTai.Dsngtiem.Contains(ngTiemHienTai.Id) == false)
+            if (dsNgTiemHienTai.Dsngtiem.Contains(ngTiemHienTai.Id) == false)
             {
                 //Cập nhật lại danh sách -> tạo hàm update trong repo
                 await _ngTiemRepository.UpdateDsNgTiemWithNgTiemIdAsync(dsNgTiemHienTai.MaGioHang, ngTiemHienTai.Id);
@@ -183,7 +248,8 @@ namespace API.Controllers
                 };*/
             }
             //Trả về NgTiemDto có id
-            return new NgTiemToReturnDto{
+            return new NgTiemToReturnDto
+            {
                 Id = ngTiemHienTai.Id,
                 HoVaTen = ngTiemHienTai.HoVaTen,
                 NgaySinh = ngTiemHienTai.NgaySinh,

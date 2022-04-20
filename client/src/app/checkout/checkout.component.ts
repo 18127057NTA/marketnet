@@ -13,6 +13,8 @@ import { IBasketTotals } from '../shared/models/basket';
 export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
   basketTotals$: Observable<IBasketTotals>;
+  
+
   //constructor(private fb: FormBuilder, private accountService: AccountService) { }
   constructor(
     private fb: FormBuilder,
@@ -46,7 +48,9 @@ export class CheckoutComponent implements OnInit {
         cccd: [null, Validators.required],
         diaChi: [null, Validators.required],
         tinhThanhTiem: [null, Validators.required],
-        chiNhanhTiem: [null, Validators.required]
+        chiNhanhTiem: [null, Validators.required],
+        //Thêm mã giỏ hàng ở đây
+        maGioHang: this.basketService.getCurrentBasketValue().id
       }),
       deliveryForm: this.fb.group({
         deliveryMethod: [null, Validators.required],

@@ -1,4 +1,4 @@
-using Infrastructure.Data;
+using Infrastructure.Data.VnvcRepos;
 using MongoDB.Driver;
 
 namespace API.Extensions
@@ -14,6 +14,7 @@ namespace API.Extensions
             });
             servicesBuilder.AddSingleton<VaccineRepository>();
             servicesBuilder.AddSingleton<NgTiemRepository>();
+            servicesBuilder.AddSingleton<MaDatMuaRepository>();
 
             return servicesBuilder;
         }

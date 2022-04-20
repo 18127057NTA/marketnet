@@ -1,7 +1,7 @@
 using Core.Entities;
 using MongoDB.Driver;
 
-namespace Infrastructure.Data
+namespace Infrastructure.Data.VnvcRepos
 {
     public class VaccineRepository
     {

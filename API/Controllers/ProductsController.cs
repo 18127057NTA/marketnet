@@ -5,7 +5,7 @@ using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
-using Infrastructure.Data;
+using Infrastructure.Data.VnvcRepos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
