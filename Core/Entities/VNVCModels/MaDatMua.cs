@@ -22,5 +22,8 @@ namespace Core.Entities.VNVCModels
         [BsonElement("magiohang")]
         [JsonProperty("magiohang")]
         public string MaGioHang { get; set; }
+        [BsonElement("madonhang")]
+        [JsonProperty("madonhang")]
+        public int MaDonHang { get; set; }
     }
 }

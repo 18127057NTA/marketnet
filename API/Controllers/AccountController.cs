@@ -6,6 +6,7 @@ using AutoMapper;
 using Core.Entities.Identity;
 using Core.Entities.VNVCModels;
 using Core.Interfaces;
+using Core.Interfaces.VnvcInterfaces;
 using Infrastructure.Data.VnvcRepos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -28,8 +29,9 @@ namespace API.Controllers
         //Repo tỉnh
         //Repo chi nhánh
         //Tất cả 3 cái trên vô 1 cái repo
-        private readonly VnvcRDbRepository _vnvcRDbRepository;
-
+        private readonly IVnvcRDbRepository _vnvcRDbRepository;
+        //Giỏ hàng
+        private readonly IBasketRepository _basketRepository;
         public AccountController(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
@@ -38,9 +40,12 @@ namespace API.Controllers
             //Người tiêm repo
             NgTiemRepository ngTiemRepo,
             //Vnvc sql repo
-            VnvcRDbRepository vnvcRDbRepo,
+            IVnvcRDbRepository vnvcRDbRepo,
             //Mã đặt mua repo
-            MaDatMuaRepository mdmRepo
+            MaDatMuaRepository mdmRepo,
+            //Giỏ hàng
+            IBasketRepository basketRepo
+            
         )
         {
             _signInManager = signInManager;
@@ -50,6 +55,7 @@ namespace API.Controllers
             _ngTiemRepository = ngTiemRepo;
             _vnvcRDbRepository = vnvcRDbRepo;
             _mdmRepository = mdmRepo;
+            _basketRepository = basketRepo;
         }
 
         //[Authorize]
@@ -104,7 +110,7 @@ namespace API.Controllers
 
         //Cập nhật / Nhập thông tin người đặt mua vaccine
         //[Authorize]
-        [HttpPut("address")]
+
         /*public async Task<ActionResult<AddressDto>> UpdateUserAddress(AddressDto address)
         {
             var user = await _userManager.FindUserByClaimsPrincipleWithAddressAsync(HttpContext.User);
@@ -116,9 +122,10 @@ namespace API.Controllers
 
             return BadRequest("Problem updating the user");
         }*/
+        [HttpPut("address")]
         public async Task<ActionResult<ThongTinNguoiMuaDto>> UpdateUserAddress(ThongTinNguoiMuaDto ttnguoimua)
         {
-            var khMoi = new KHACH_HANG
+            var khachHang = new KHACH_HANG
             {
                 KH_HOTEN = ttnguoimua.HoTen,
                 KH_CCCD = ttnguoimua.Cccd,
@@ -126,40 +133,41 @@ namespace API.Controllers
                 KH_EMAIL = ttnguoimua.Email,
                 KH_DIACHI = ttnguoimua.DiaChi
             };
-            //Kiểm tra người mua đã tồn tại hay chưa?
-            var user = await _vnvcRDbRepository.GetNgMuaTheoCccdAsync(khMoi.KH_CCCD);
-            //Nếu user đã tồn tại
-            if (user != null)
-            {
-                //Lấy mã khách hàng
-                khMoi.Id = user.Id;
-                //Cập nhật số điện thoại người mua nếu có thay đổi
-                if (user.KH_SDT != khMoi.KH_SDT)
-                {
-                    await _vnvcRDbRepository.UpdateNgMuaBySdt(khMoi.KH_CCCD, khMoi.KH_SDT);
-                }
-                var mDMMoi = new MaDatMua
-                {
-                    MaKH = user.Id,
-                    MaGioHang = ttnguoimua.MaGioHang,
-                    SdtKH = ttnguoimua.Sdt
+            //Tạo người mua mới nếu chưa có
+            var ngMua = await _vnvcRDbRepository.CreateNgMuaAsync(khachHang);
+            //Tạo hóa đơn mới - thiếu ngày tiêm - chưa tính tổng tiền(đợi phương thức thanh toán)
+            var hoaDonMs = new DON_HANG {
+                DH_IDCN = ttnguoimua.ChiNhanhTiem,
+                DH_IDKH = ngMua.Id,
+                DH_NGAY = DateTime.Now,
+                DH_TTRANG = "Chua thanh toan"
+            };
+            var donHangMs = _vnvcRDbRepository.CreateDonHangAsync(hoaDonMs);
+            //Tạo chi tiết đơn hàng
+            //Lấy thông tin giỏ hàng hiện tại
+            var gioHang = _basketRepository.GetBasketAsync(ttnguoimua.MaGioHang).Result;
+            //Với mỗi mặt hàng trong giỏ hàng
+            foreach (var item in gioHang.Items){
+                //Tạo một chi tiết đơn hàng mới
+                var ctdh = new CHI_TIET_DON_HANG {
+                    CTDH_GIA = item.Gia,
+                    CTDH_IDDH = donHangMs.Id,
+                    CTDH_IDSP = item.Id,
+                    CTDH_SL = item.SoLuongGoi,
+                    CTDH_TENSP = item.Ten
                 };
-                await _mdmRepository.CreateMDMAsync(mDMMoi);
+                //Tạo đơn hàng mới
+                await _vnvcRDbRepository.CreateCTDHAsync(ctdh);
             }
-            else
+            //Tạo mã đặt mua mới
+            var maDatMua = new MaDatMua
             {
-                //Thêm khách hàng mới
-                //Id của khách hàng mới đang bằng null -> nếu insert bị lỗi -> select count và + 1 sau đó gán vào id
-                var khTaoMoi = await _vnvcRDbRepository.CreateNgMuaAsync(khMoi);
-                //Tạo document mới trong ma-dat-mua
-                var mDMMoi = new MaDatMua
-                {
-                    MaKH = khTaoMoi.Id,
-                    MaGioHang = ttnguoimua.MaGioHang,
-                    SdtKH = ttnguoimua.Sdt
-                };
-                await _mdmRepository.CreateMDMAsync(mDMMoi);
-            }
+                MaKH = ngMua.Id,
+                MaGioHang = ttnguoimua.MaGioHang,
+                SdtKH = ngMua.KH_SDT,
+                MaDonHang = donHangMs.Id
+            };
+            await _mdmRepository.CreateMDMAsync(maDatMua);
             //Trả về thông tin người mua kèm mã giỏ hàng
             return ttnguoimua;
         }

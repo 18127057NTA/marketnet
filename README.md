@@ -1,3 +1,4 @@
+@@ -1,108 +0,0 @@
 package needed:
 - dotnet 6 sdk
 - crtl + shift + p: chọn nuget: open nuget gallery
