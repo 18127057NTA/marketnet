@@ -125,7 +125,7 @@ namespace API.Controllers
         [HttpPut("address")]
         public async Task<ActionResult<ThongTinNguoiMuaDto>> UpdateUserAddress(ThongTinNguoiMuaDto ttnguoimua)
         {
-            var khachHang = new KHACH_HANG
+            /*var khachHang = new KHACH_HANG
             {
                 KH_HOTEN = ttnguoimua.HoTen,
                 KH_CCCD = ttnguoimua.Cccd,
@@ -168,7 +168,7 @@ namespace API.Controllers
                 MaDonHang = donHangMs.Id
             };
             await _mdmRepository.CreateMDMAsync(maDatMua);
-            //Trả về thông tin người mua kèm mã giỏ hàng
+            //Trả về thông tin người mua kèm mã giỏ hàng*/
             return ttnguoimua;
         }
 

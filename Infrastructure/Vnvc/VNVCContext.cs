@@ -10,12 +10,12 @@ namespace Infrastructure.Data
         {
         }
 
-        public DbSet<KHACH_HANG> khachHang { get; set; }
-        public DbSet<TINH_THANH> tinhThanh { get; set; }
-        public DbSet<VIP> vips { get; set; }
-        public DbSet<DON_HANG> donHang { get; set; }
-        public DbSet<CHI_TIET_DON_HANG> cTietDonHang { get; set; }
-        public DbSet<CHI_NHANH> chiNhanh { get; set; }
+        public DbSet<KhachHang> khachHang { get; set; }
+        public DbSet<TinhThanh> tinhThanh { get; set; }
+        public DbSet<Vip> vip { get; set; }
+        public DbSet<DonHang> donHang { get; set; }
+        public DbSet<ChiTietDonHang> chiTietDonHang { get; set; }
+        public DbSet<ChiNhanh> chiNhanh { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             base.OnModelCreating(modelBuilder);
