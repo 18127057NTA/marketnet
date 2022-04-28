@@ -16,6 +16,7 @@ namespace Infrastructure.Data
         public DbSet<DonHang> donHang { get; set; }
         public DbSet<ChiTietDonHang> chiTietDonHang { get; set; }
         public DbSet<ChiNhanh> chiNhanh { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             base.OnModelCreating(modelBuilder);

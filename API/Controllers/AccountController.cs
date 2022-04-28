@@ -125,22 +125,22 @@ namespace API.Controllers
         [HttpPut("address")]
         public async Task<ActionResult<ThongTinNguoiMuaDto>> UpdateUserAddress(ThongTinNguoiMuaDto ttnguoimua)
         {
-            /*var khachHang = new KHACH_HANG
+            var khachHang = new KhachHang
             {
-                KH_HOTEN = ttnguoimua.HoTen,
-                KH_CCCD = ttnguoimua.Cccd,
-                KH_SDT = ttnguoimua.Sdt,
-                KH_EMAIL = ttnguoimua.Email,
-                KH_DIACHI = ttnguoimua.DiaChi
+                HoTen = ttnguoimua.HoTen,
+                Cccd = ttnguoimua.Cccd,
+                Sdt = ttnguoimua.Sdt,
+                Email = ttnguoimua.Email,
+                DiaChi = ttnguoimua.DiaChi
             };
             //Tạo người mua mới nếu chưa có
             var ngMua = await _vnvcRDbRepository.CreateNgMuaAsync(khachHang);
             //Tạo hóa đơn mới - thiếu ngày tiêm - chưa tính tổng tiền(đợi phương thức thanh toán)
-            var hoaDonMs = new DON_HANG {
-                DH_IDCN = ttnguoimua.ChiNhanhTiem,
-                DH_IDKH = ngMua.Id,
-                DH_NGAY = DateTime.Now,
-                DH_TTRANG = "Chua thanh toan"
+            var hoaDonMs = new DonHang {
+                ChiNhanhId = ttnguoimua.ChiNhanhTiem,
+                KhachHangId = ngMua.Id,
+                NgayMua = DateTime.Now,
+                TinhTrang = "Chua thanh toan"
             };
             var donHangMs = _vnvcRDbRepository.CreateDonHangAsync(hoaDonMs);
             //Tạo chi tiết đơn hàng
@@ -149,12 +149,12 @@ namespace API.Controllers
             //Với mỗi mặt hàng trong giỏ hàng
             foreach (var item in gioHang.Items){
                 //Tạo một chi tiết đơn hàng mới
-                var ctdh = new CHI_TIET_DON_HANG {
-                    CTDH_GIA = item.Gia,
-                    CTDH_IDDH = donHangMs.Id,
-                    CTDH_IDSP = item.Id,
-                    CTDH_SL = item.SoLuongGoi,
-                    CTDH_TENSP = item.Ten
+                var ctdh = new ChiTietDonHang {
+                    DonGia = item.Gia,
+                    DonHangId = donHangMs.Id,
+                    MaSanPham = item.Id,
+                    SoLuong = item.SoLuongGoi,
+                   TenSanPham = item.Ten
                 };
                 //Tạo đơn hàng mới
                 await _vnvcRDbRepository.CreateCTDHAsync(ctdh);
@@ -164,7 +164,7 @@ namespace API.Controllers
             {
                 MaKH = ngMua.Id,
                 MaGioHang = ttnguoimua.MaGioHang,
-                SdtKH = ngMua.KH_SDT,
+                SdtKH = ngMua.Sdt,
                 MaDonHang = donHangMs.Id
             };
             await _mdmRepository.CreateMDMAsync(maDatMua);

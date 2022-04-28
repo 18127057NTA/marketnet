@@ -12,14 +12,14 @@ namespace Infrastructure.Data.VnvcRepos
             _vnvcContxt = vnvcContext;
         }
 
-        public async Task<bool> CreateCTDHAsync(CHI_TIET_DON_HANG ctdhang)
+        public async Task<bool> CreateCTDHAsync(ChiTietDonHang ctdhang)
         {
             //Đơn hàng lúc tải vô chưa có id
-            await _vnvcContxt.cTietDonHang.AddAsync(ctdhang);
+            await _vnvcContxt.chiTietDonHang.AddAsync(ctdhang);
             return await _vnvcContxt.SaveChangesAsync() > 0;
         }
 
-        public async Task<DON_HANG> CreateDonHangAsync(DON_HANG donHang)
+        public async Task<DonHang> CreateDonHangAsync(DonHang donHang)
         {
             await _vnvcContxt.donHang.AddAsync(donHang);
             await _vnvcContxt.SaveChangesAsync();
@@ -27,28 +27,28 @@ namespace Infrastructure.Data.VnvcRepos
             return donHang;
         }
 
-        public async Task<KHACH_HANG> CreateNgMuaAsync(KHACH_HANG kh)
+        public async Task<KhachHang> CreateNgMuaAsync(KhachHang kh)
         {
-            var nguoiMua = await this.GetNgMuaTheoCccdAsync(kh.KH_CCCD);
-            if (nguoiMua != null && nguoiMua.KH_SDT != kh.KH_SDT)
+            var nguoiMua = await this.GetNgMuaTheoCccdAsync(kh.Cccd);
+            if (nguoiMua != null && nguoiMua.Sdt != kh.Cccd)
             {
-                await this.UpdateNgMuaBySdt(nguoiMua.KH_CCCD, kh.KH_SDT);
+                await this.UpdateNgMuaBySdt(nguoiMua.Cccd, kh.Sdt);
                 return nguoiMua;
             }
             await _vnvcContxt.khachHang.AddAsync(kh);
             await _vnvcContxt.SaveChangesAsync();
-            return await this.GetNgMuaTheoCccdAsync(kh.KH_CCCD);
+            return await this.GetNgMuaTheoCccdAsync(kh.Cccd);
         }
 
-        public async Task<KHACH_HANG> GetNgMuaTheoCccdAsync(string cc)
+        public async Task<KhachHang> GetNgMuaTheoCccdAsync(string cc)
         {
-            return await _vnvcContxt.khachHang.FirstOrDefaultAsync(kh => kh.KH_CCCD == cc);
+            return await _vnvcContxt.khachHang.FirstOrDefaultAsync(kh => kh.Cccd == cc);
         }
 
         public async Task<bool> UpdateNgMuaBySdt(string ngMuaCc, string ngMuaSdt)
         {
-            var khCu = await _vnvcContxt.khachHang.FirstOrDefaultAsync(k1 => k1.KH_CCCD == ngMuaCc);
-            khCu.KH_SDT = ngMuaSdt;
+            var khCu = await _vnvcContxt.khachHang.FirstOrDefaultAsync(k1 => k1.Cccd == ngMuaCc);
+            khCu.Sdt = ngMuaSdt;
 
             _vnvcContxt.khachHang.Attach(khCu);
             _vnvcContxt.Entry(khCu).State = EntityState.Modified;

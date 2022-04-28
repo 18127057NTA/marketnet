@@ -33,7 +33,8 @@ namespace API
                     await identityContext.Database.MigrateAsync();
                     await AppIdentityDbContextSeed.SeedUsersAsync(userManager);
                     //Vnvc
-                    //var vnvcContext = services.GetRequiredService<VNVCContext>();
+                    var vnvcContext = services.GetRequiredService<VNVCContext>();
+                    await vnvcContext.Database.MigrateAsync();
                 }
                 catch(Exception ex)
                 {

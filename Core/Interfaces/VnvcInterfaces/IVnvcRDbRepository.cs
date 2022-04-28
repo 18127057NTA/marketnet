@@ -4,10 +4,11 @@ namespace Core.Interfaces.VnvcInterfaces
 {
     public interface IVnvcRDbRepository
     {
-        Task<KHACH_HANG> GetNgMuaTheoCccdAsync (string cc);
-        Task<KHACH_HANG> CreateNgMuaAsync (KHACH_HANG kh);
+        
+        Task<KhachHang> GetNgMuaTheoCccdAsync (string cc);
+        Task<KhachHang> CreateNgMuaAsync (KhachHang kh);
         Task<bool> UpdateNgMuaBySdt(string ngMuaCc, string ngMuaSdt);
-        Task<DON_HANG> CreateDonHangAsync(DON_HANG donHang);
-        Task<bool> CreateCTDHAsync(CHI_TIET_DON_HANG ctdhang);
+        Task<DonHang> CreateDonHangAsync(DonHang donHang);
+        Task<bool> CreateCTDHAsync(ChiTietDonHang ctdhang);
     }
 }

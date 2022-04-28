@@ -7,7 +7,6 @@ namespace Core.Entities.VNVCModels
         public string DiaChi {get; set;}
         public string Email {get; set;}
         public string HoTen {get; set;}
-        public string MaVip {get; set;}
         public string Sdt {get; set;}
     }
 }

@@ -61,6 +61,7 @@ thao tác sql lite
   --no-color                             Don't colorize output.
   --prefix-output                        Prefix output with level.
 
+dotnet ef migrations add VnvcInitialCreate -p Infrastructure -s API -o Data/Vnvc/Migrations
 - Điều chỉnh migrations:
 
 Chú ý: https://stackoverflow.com/questions/52311053/more-than-one-dbcontext-was-found

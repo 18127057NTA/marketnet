@@ -8,6 +8,7 @@ namespace Core.Entities.VNVCModels
         public KhachHang KhachHang {get; set;}
         public int KhachHangId {get; set;}
         public DateTime NgayMua {get; set;}
+        public DateTime NgayTiem {get; set;}
         public int TongTien {get; set;}
         public string TinhTrang {get; set;}
     }
