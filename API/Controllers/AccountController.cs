@@ -142,7 +142,7 @@ namespace API.Controllers
                 NgayMua = DateTime.Now,
                 TinhTrang = "Chua thanh toan"
             };
-            var donHangMs = _vnvcRDbRepository.CreateDonHangAsync(hoaDonMs);
+            var donHangMs = _vnvcRDbRepository.CreateDonHangAsync(hoaDonMs).Result;
             //Tạo chi tiết đơn hàng
             //Lấy thông tin giỏ hàng hiện tại
             var gioHang = _basketRepository.GetBasketAsync(ttnguoimua.MaGioHang).Result;

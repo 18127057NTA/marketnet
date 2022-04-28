@@ -21,6 +21,7 @@ namespace Infrastructure.Data.VnvcRepos
 
         public async Task<DonHang> CreateDonHangAsync(DonHang donHang)
         {
+
             await _vnvcContxt.donHang.AddAsync(donHang);
             await _vnvcContxt.SaveChangesAsync();
             //Có khả năng phải tạo biến mới copy donHang thì id ms nhận?
@@ -30,7 +31,7 @@ namespace Infrastructure.Data.VnvcRepos
         public async Task<KhachHang> CreateNgMuaAsync(KhachHang kh)
         {
             var nguoiMua = await this.GetNgMuaTheoCccdAsync(kh.Cccd);
-            if (nguoiMua != null && nguoiMua.Sdt != kh.Cccd)
+            if (nguoiMua != null && nguoiMua.Cccd != kh.Cccd)
             {
                 await this.UpdateNgMuaBySdt(nguoiMua.Cccd, kh.Sdt);
                 return nguoiMua;

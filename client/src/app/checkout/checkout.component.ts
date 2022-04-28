@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AccountService } from '../account/account.service';
 import { BasketService } from '../basket/basket.service';
-import { IBasketTotals } from '../shared/models/basket';
+import { IBasket, IBasketTotals } from '../shared/models/basket';
 
 @Component({
   selector: 'app-checkout',
@@ -15,18 +15,20 @@ export class CheckoutComponent implements OnInit {
   basketTotals$: Observable<IBasketTotals>;
   
 
+
   //constructor(private fb: FormBuilder, private accountService: AccountService) { }
   constructor(
     private fb: FormBuilder,
     private accountService: AccountService,
     private basketService: BasketService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.createCheckoutForm();
     //this.getAddressFormValues();
     //this.getDeliveryMethodValue();
     this.basketTotals$ = this.basketService.basketTotal$;
+    
   }
 
   createCheckoutForm() {
@@ -50,7 +52,7 @@ export class CheckoutComponent implements OnInit {
         tinhThanhTiem: [null, Validators.required],
         chiNhanhTiem: [null, Validators.required],
         //Thêm mã giỏ hàng ở đây
-        maGioHang: this.basketService.getCurrentBasketValue().id
+        maGioHang:  null
       }),
       deliveryForm: this.fb.group({
         deliveryMethod: [null, Validators.required],
@@ -61,7 +63,7 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  getAddressFormValues() {
+  /*getAddressFormValues() {
     this.accountService.getUserAddress().subscribe(
       (address) => {
         if (address) {
@@ -72,7 +74,7 @@ export class CheckoutComponent implements OnInit {
         console.log(error);
       }
     );
-  }
+  }*/
   getDeliveryMethodValue() {
     /*const basket = this.basketService.getCurrentBasketValue();
     if (basket.deliveryMethodId !== null) {
