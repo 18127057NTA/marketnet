@@ -143,9 +143,12 @@ namespace API.Controllers
                 TinhTrang = "Chua thanh toan"
             };
             var donHangMs = _vnvcRDbRepository.CreateDonHangAsync(hoaDonMs).Result;
-            //Tạo chi tiết đơn hàng
+            //Cập nhật danh sách người tiêm
+            await _ngTiemRepository.UpdateDsNgTiemWithMaHoaDonAsync(ttnguoimua.MaGioHang, donHangMs.Id);
             //Lấy thông tin giỏ hàng hiện tại
             var gioHang = _basketRepository.GetBasketAsync(ttnguoimua.MaGioHang).Result;
+            //Bắt đầu tính tổng tiền
+            var tongTien = 0;
             //Với mỗi mặt hàng trong giỏ hàng
             foreach (var item in gioHang.Items){
                 //Tạo một chi tiết đơn hàng mới
@@ -156,9 +159,15 @@ namespace API.Controllers
                     SoLuong = item.SoLuongGoi,
                    TenSanPham = item.Ten
                 };
+                tongTien = tongTien + ctdh.DonGia * ctdh.SoLuong;
                 //Tạo đơn hàng mới
                 await _vnvcRDbRepository.CreateCTDHAsync(ctdh);
             }
+            //Thêm tổng tiền vào hóa đơn
+            //await _vnvcRDbRepository.UpdateDonHangByTongTien(donHangMs.Id, tongTien);
+
+            //Cập nhật tổng tiền cho giỏ hàng
+            gioHang.Total = tongTien;
             //Tạo mã đặt mua mới
             var maDatMua = new MaDatMua
             {
@@ -169,6 +178,11 @@ namespace API.Controllers
             };
             await _mdmRepository.CreateMDMAsync(maDatMua);
             //Trả về thông tin người mua kèm mã giỏ hàng*/
+            
+            //Cập nhật mã giỏ hàng
+            gioHang.TTChuyenKhoan = maDatMua.SdtKH + "_" + maDatMua.Id;
+            await _basketRepository.UpdateBasketAsync(gioHang);
+
             return ttnguoimua;
         }
 

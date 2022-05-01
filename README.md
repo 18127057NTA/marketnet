@@ -1,4 +1,4 @@
-@@ -1,108 +0,0 @@
+
 package needed:
 - dotnet 6 sdk
 - crtl + shift + p: chọn nuget: open nuget gallery
@@ -105,6 +105,16 @@ update entity(row):
 https://entityframework.net/knowledge-base/46657813/how-to-update-record-using-entity-framework-core-
 https://stackoverflow.com/questions/7149943/entity-framework-update-a-row-in-a-table
 https://stackoverflow.com/questions/28932621/best-way-to-update-an-entity-in-entity-framework
+https://stackoverflow.com/questions/42507640/update-specific-field-in-mongodb-document
 
 chú ý về primary tự tăng:
 https://stackoverflow.com/questions/61119828/auto-increment-primary-key-with-entity-framework
+
+Xóa lịch sử shell: 
+Remove-Item (Get-PSReadlineOption).HistorySavePath
+Set-PSReadlineOption -HistorySaveStyle SaveNothing
+
+Nối chuỗi
+https://docs.microsoft.com/en-us/dotnet/csharp/how-to/concatenate-multiple-strings
+
+Lấy kết quả trả về dạng Observable:https://stackoverflow.com/questions/61340819/convert-observableobject-to-string

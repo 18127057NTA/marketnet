@@ -1,15 +1,13 @@
-<div class="mt-4" [formGroup]="checkoutForm">
+<!--<div class="mt-4" [formGroup]="checkoutForm">
   <div class="row">
     <div class="form-group col-12" formGroupName="paymentForm">
-      <app-text-input
-        [label]="'Tên trên thẻ'"
-        formControlName="nameOnCard"
-      ></app-text-input>
+      <app-text-input [label]="'Mã đặt mua'" formControlName="nameOnCard"></app-text-input>
     </div>
     <div class="form-group col-6">
       <div #cardNumber class="form-control py-3"></div>
-      <ng-container *ngIf="cardErrors">
-        <span class="text-danger">{{ cardErrors }}</span>
+      <ng-container >
+        <span class="text-danger">{{ ttThanhToan }}</span>
+        <span class="text-danger">{{ ttChuyenKhoan }}</span>
       </ng-container>
     </div>
     <div class="form-group col-3">
@@ -19,11 +17,186 @@
       <div #cardCvc class="form-control py-3"></div>
     </div>
   </div>
+</div>-->
+
+<p data-v-75d97920="" class="h5 font-weight-bolder text-left pt-4" style="line-height: 22px;">
+  VNVC chỉ thực hiện giữ chỗ cho vắc xin sau khi nhận được
+  thanh toán từ Quý khách và tổng số lượng đặt mua không vượt
+  quá giới hạn mũi tiêm chúng tôi có thể cung cấp.
+</p>
+
+<div data-v-75d97920="" class="h4 font-weight-bolder d-flex flex-column text-left">
+  Hướng dẫn thanh toán
+  <div data-v-75d97920="" class="h5 pt-4">
+    1. Quý khách có thể thanh toán
+    <b data-v-75d97920="">trực tiếp tại các Trung tâm VNVC </b> trên toàn quốc
+  </div>
+  <div data-v-75d97920="" class="h5 pt-3">
+    2. Quý khách có thể
+    <b data-v-75d97920="">thanh toán bằng hình thức chuyển khoản</b> như sau:
+  </div>
 </div>
 
-<div
-  class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5"
->
+<div data-v-75d97920="" class="py-4">
+  <div data-v-75d97920="" class="d-flex flex-column"
+    style="background: rgb(255, 255, 255); border-radius: 23px; padding: 34px 40px;">
+    <div data-v-75d97920="" class="h5" style="line-height: 22px;">
+      Vui lòng chuyển khoản số tiền
+      <br>
+      <br>
+      <strong > {{ttThanhToan}}</strong>
+      <br>
+      <br>
+      với nội dung như sau :
+    </div>
+    <div class="h5 font-weight-bolder pt-2" style="line-height: 22px; overflow-wrap: break-word;">
+      {{ttChuyenKhoan}}
+    </div>
+  </div>
+</div>
+
+<div data-v-75d97920="" class="text-left">
+  <div data-v-75d97920="" class="h4 font-weight-bolder">
+    Thông tin đơn vị thụ hưởng
+  </div>
+  <div data-v-75d97920="" class="d-flex flex-row ">
+    <div data-v-75d97920="" class="px-1 pt-2"><span data-v-75d97920="" class="h6 font-weight-bolder">Miền
+        Bắc</span>
+      <div data-v-75d97920="" class="h6 font-weight-bolder pt-2">
+        1. Vietcombank
+      </div>
+      <div data-v-75d97920="" class="h6 pt-3 d-flex">
+        <div data-v-75d97920="" class="d-flex mr-2"><svg data-v-75d97920="" viewBox="0 0 7 7" fill="none"
+            xmlns="http://www.w3.org/2000/svg" class="svg-icon"
+            style="width: 7px; height: 7px; fill: rgb(42, 56, 143); position: relative; top: 5px;">
+            <circle cx="3.5" cy="3.5" r="3.5" fill="#2A388F"></circle>
+          </svg></div> <span data-v-75d97920="">Chủ TK: Công ty cổ phần vắc xin Việt Nam</span>
+      </div>
+      <div data-v-75d97920="" class="h6  d-flex">
+        <div data-v-75d97920="" class="d-flex mr-2"><svg data-v-75d97920="" viewBox="0 0 7 7" fill="none"
+            xmlns="http://www.w3.org/2000/svg" class="svg-icon"
+            style="width: 7px; height: 7px; fill: rgb(42, 56, 143); position: relative; top: 5px;">
+            <circle cx="3.5" cy="3.5" r="3.5" fill="#2A388F"></circle>
+          </svg></div> <span data-v-75d97920="">STK :
+          <strong data-v-75d97920="" style="color: red;"> 0961000035722</strong></span>
+      </div>
+      <div data-v-75d97920="" class="h6 d-flex">
+        <div data-v-75d97920="" class="d-flex mr-2"><svg data-v-75d97920="" viewBox="0 0 7 7" fill="none"
+            xmlns="http://www.w3.org/2000/svg" class="svg-icon"
+            style="width: 7px; height: 7px; fill: rgb(42, 56, 143); position: relative; top: 5px;">
+            <circle cx="3.5" cy="3.5" r="3.5" fill="#2A388F"></circle>
+          </svg></div> <span data-v-75d97920="">
+          Ngân hàng: TMCP Ngoại thương VN - Chi nhánh Đông
+          Anh, Hà Nội
+        </span>
+      </div>
+    </div>
+    <div data-v-75d97920="" class="px-1 pt-2"><span data-v-75d97920="" class="h6 font-weight-bolder">Miền
+        Nam</span>
+      <div data-v-75d97920="" class="h6 font-weight-bolder pt-2">
+        1. Techcombank
+      </div>
+      <div data-v-75d97920="" class="h6 pt-3 d-flex">
+        <div data-v-75d97920="" class="d-flex mr-2"><svg data-v-75d97920="" viewBox="0 0 7 7" fill="none"
+            xmlns="http://www.w3.org/2000/svg" class="svg-icon"
+            style="width: 7px; height: 7px; fill: rgb(42, 56, 143); position: relative; top: 5px;">
+            <circle cx="3.5" cy="3.5" r="3.5" fill="#2A388F"></circle>
+          </svg></div> <span data-v-75d97920="">Chủ TK: Công ty cổ phần vắc xin Việt Nam - CN
+          TP.HCM</span>
+      </div>
+      <div data-v-75d97920="" class="h6  d-flex">
+        <div data-v-75d97920="" class="d-flex mr-2"><svg data-v-75d97920="" viewBox="0 0 7 7" fill="none"
+            xmlns="http://www.w3.org/2000/svg" class="svg-icon"
+            style="width: 7px; height: 7px; fill: rgb(42, 56, 143); position: relative; top: 5px;">
+            <circle cx="3.5" cy="3.5" r="3.5" fill="#2A388F"></circle>
+          </svg></div> <span data-v-75d97920="">STK :
+          <strong data-v-75d97920="" style="color: red;"> 19132680330012 </strong></span>
+      </div>
+      <div data-v-75d97920="" class="h6  d-flex">
+        <div data-v-75d97920="" class="d-flex mr-2"><svg data-v-75d97920="" viewBox="0 0 7 7" fill="none"
+            xmlns="http://www.w3.org/2000/svg" class="svg-icon"
+            style="width: 7px; height: 7px; fill: rgb(42, 56, 143); position: relative; top: 5px;">
+            <circle cx="3.5" cy="3.5" r="3.5" fill="#2A388F"></circle>
+          </svg></div> <span data-v-75d97920="">
+          Ngân hàng: Techcombank – CN Thắng Lợi, Tp.HCM
+        </span>
+      </div>
+    </div>
+  </div>
+  <div data-v-75d97920="" class="d-flex flex-row ">
+    <div data-v-75d97920="" class="px-1 pt-2">
+      <div data-v-75d97920="" class="h6 font-weight-bolder pt-2">
+        2. Vietinbank
+      </div>
+      <div data-v-75d97920="" class="h6 pt-3 d-flex">
+        <div data-v-75d97920="" class="d-flex mr-2"><svg data-v-75d97920="" viewBox="0 0 7 7" fill="none"
+            xmlns="http://www.w3.org/2000/svg" class="svg-icon"
+            style="width: 7px; height: 7px; fill: rgb(42, 56, 143); position: relative; top: 5px;">
+            <circle cx="3.5" cy="3.5" r="3.5" fill="#2A388F"></circle>
+          </svg></div> <span data-v-75d97920="">Chủ TK: Công ty cổ phần vắc xin Việt Nam</span>
+      </div>
+      <div data-v-75d97920="" class="h6  d-flex">
+        <div data-v-75d97920="" class="d-flex mr-2"><svg data-v-75d97920="" viewBox="0 0 7 7" fill="none"
+            xmlns="http://www.w3.org/2000/svg" class="svg-icon"
+            style="width: 7px; height: 7px; fill: rgb(42, 56, 143); position: relative; top: 5px;">
+            <circle cx="3.5" cy="3.5" r="3.5" fill="#2A388F"></circle>
+          </svg></div> <span data-v-75d97920="">STK :
+          <strong data-v-75d97920="" style="color: red;"> 115002659594</strong></span>
+      </div>
+      <div data-v-75d97920="" class="h6 d-flex">
+        <div data-v-75d97920="" class="d-flex mr-2"><svg data-v-75d97920="" viewBox="0 0 7 7" fill="none"
+            xmlns="http://www.w3.org/2000/svg" class="svg-icon"
+            style="width: 7px; height: 7px; fill: rgb(42, 56, 143); position: relative; top: 5px;">
+            <circle cx="3.5" cy="3.5" r="3.5" fill="#2A388F"></circle>
+          </svg></div> <span data-v-75d97920="">
+          Ngân hàng: TMCP Công Thương Việt Nam CN Đống Đa – Hà
+          Nội
+        </span>
+      </div>
+    </div>
+    <div data-v-75d97920="" class="px-1 pt-2">
+      <div data-v-75d97920="" class="h6 font-weight-bolder pt-2">
+        2. MBBank
+      </div>
+      <div data-v-75d97920="" class="h6 pt-3 d-flex">
+        <div data-v-75d97920="" class="d-flex mr-2"><svg data-v-75d97920="" viewBox="0 0 7 7" fill="none"
+            xmlns="http://www.w3.org/2000/svg" class="svg-icon"
+            style="width: 7px; height: 7px; fill: rgb(42, 56, 143); position: relative; top: 5px;">
+            <circle cx="3.5" cy="3.5" r="3.5" fill="#2A388F"></circle>
+          </svg></div> <span data-v-75d97920="">
+          Chủ TK: Công ty cổ phần vắc xin Việt Nam - CN TP.HCM
+        </span>
+      </div>
+      <div data-v-75d97920="" class="h6  d-flex">
+        <div data-v-75d97920="" class="d-flex mr-2"><svg data-v-75d97920="" viewBox="0 0 7 7" fill="none"
+            xmlns="http://www.w3.org/2000/svg" class="svg-icon"
+            style="width: 7px; height: 7px; fill: rgb(42, 56, 143); position: relative; top: 5px;">
+            <circle cx="3.5" cy="3.5" r="3.5" fill="#2A388F"></circle>
+          </svg></div> <span data-v-75d97920="">STK :
+          <strong data-v-75d97920="" style="color: red;"> 1031101859009 </strong></span>
+      </div>
+      <div data-v-75d97920="" class="h6  d-flex">
+        <div data-v-75d97920="" class="d-flex mr-2"><svg data-v-75d97920="" viewBox="0 0 7 7" fill="none"
+            xmlns="http://www.w3.org/2000/svg" class="svg-icon"
+            style="width: 7px; height: 7px; fill: rgb(42, 56, 143); position: relative; top: 5px;">
+            <circle cx="3.5" cy="3.5" r="3.5" fill="#2A388F"></circle>
+          </svg></div> <span data-v-75d97920="">
+          Ngân hàng: Quân Đội - CN Sở Giao Dịch 2, TP.HCM
+        </span>
+      </div>
+    </div>
+  </div>
+  <div data-v-75d97920="" class="h6 pt-3 mt-1 text-left text-primary" style="line-height: 20px;">
+    Lưu ý: Nếu quý khách không nhận được tin nhắn xác nhận đã
+    thanh toán từ VNVC trong vòng 48 giờ (Không tính thứ 7,
+    chủ nhật) sau khi hoàn tất quá trình chuyển khoản, vui
+    lòng liên hệ đến<span data-v-75d97920="" class="text-warning">
+      hotline <strong data-v-75d97920="">02873006595</strong></span>
+    để được hỗ trợ.
+  </div>
+</div>
+
+<div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
   <button class="btn btn-outline-primary mt-3" cdkStepperPrevious>
     <i class="fa fa-angle-left"></i> Trở về tổng quan
   </button>

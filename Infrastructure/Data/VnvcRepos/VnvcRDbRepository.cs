@@ -46,6 +46,17 @@ namespace Infrastructure.Data.VnvcRepos
             return await _vnvcContxt.khachHang.FirstOrDefaultAsync(kh => kh.Cccd == cc);
         }
 
+        public async Task<bool> UpdateDonHangByTongTien(int maDonHang, int tongtien)
+        {
+            var dhCu = await _vnvcContxt.donHang.FirstOrDefaultAsync(dh => dh.Id == maDonHang);
+            dhCu.TongTien = tongtien;
+            
+            _vnvcContxt.donHang.Attach(dhCu);
+            _vnvcContxt.Entry(dhCu).State = EntityState.Modified;
+
+            return await _vnvcContxt.SaveChangesAsync() > 0;
+        }
+
         public async Task<bool> UpdateNgMuaBySdt(string ngMuaCc, string ngMuaSdt)
         {
             var khCu = await _vnvcContxt.khachHang.FirstOrDefaultAsync(k1 => k1.Cccd == ngMuaCc);
@@ -54,7 +65,7 @@ namespace Infrastructure.Data.VnvcRepos
             _vnvcContxt.khachHang.Attach(khCu);
             _vnvcContxt.Entry(khCu).State = EntityState.Modified;
 
-            return _vnvcContxt.SaveChanges() > 0;
+            return await _vnvcContxt.SaveChangesAsync() > 0;
         }
     }
 }

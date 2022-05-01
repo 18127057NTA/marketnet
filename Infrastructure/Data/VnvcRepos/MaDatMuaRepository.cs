@@ -24,5 +24,10 @@ namespace Infrastructure.Data.VnvcRepos
             return await _mdmCollection.Aggregate()
                 .Match(Builders<MaDatMua>.Filter.Eq(x => x.SdtKH, mdm.SdtKH)).FirstOrDefaultAsync();
         }
+
+        public async Task<MaDatMua> GetMDMByBasketIdAsync(string basketid){
+            return await _mdmCollection.Aggregate()
+                .Match(Builders<MaDatMua>.Filter.Eq(x => x.MaGioHang, basketid)).FirstOrDefaultAsync();
+        }
     }
 }

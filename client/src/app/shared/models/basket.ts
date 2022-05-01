@@ -7,6 +7,15 @@ export interface IBasket {
   //paymentIntentId?: string;
   //deliveryMethodId?: number;
   //shippingPrice?: number;
+
+  //Mã vip nếu có
+  vipMemberId?: string;
+  //Phương thức thanh toán
+  paymentTypeId?: number;
+  //Tổng tiền
+  total?: number;
+  //Thông tin chuyển khoản
+  ttChuyenKhoan?: string;
 }
 
 /*export interface IBasketItem {

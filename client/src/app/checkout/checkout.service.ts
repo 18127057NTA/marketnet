@@ -10,6 +10,8 @@ import { IOrderToCreate } from '../shared/models/order';
 })
 export class CheckoutService {
   baseUrl = environment.apiUrl;
+  
+
   constructor(private http: HttpClient) { }
 
   createOrder(order: IOrderToCreate) {
@@ -23,4 +25,8 @@ export class CheckoutService {
       })
     )
   }
+
+  /*getTTChuyenKhoan(mgh: string){
+    return this.http.get(this.baseUrl + 'orders/ttChuyenKhoan?mgh=' + mgh);
+  }*/
 }

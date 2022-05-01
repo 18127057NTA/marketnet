@@ -18,5 +18,10 @@ namespace Core.Entities
         //public string ClientSecret { get; set; }
         //public string PaymentIntentId { get; set; }
         //public decimal ShippingPrice { get; set; }
+
+        public string VipMemberId {get; set;}
+        public int PaymentTypeId {get; set;}
+        public int Total {get; set;}
+        public string TTChuyenKhoan {get; set;}
     }
 }

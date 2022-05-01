@@ -1,21 +1,21 @@
 <div class="mt-4" [formGroup]="checkoutForm">
   <h4 class="mb-3">Chọn phương thức giao hàng</h4>
   <div class="row" formGroupName="deliveryForm">
-    <div class="col-6 form-group" *ngFor="let method of deliveryMethods">
+    <div class="col-6 form-group" *ngFor="let pt of phuongThucTT">
       <input
         type="radio"
-        id="{{ method.id }}"
-        (click)="setShippingPrice(method)"
-        value="{{ method.id }}"
+        id="{{ pt.id }}"
+        (click)="setShippingPrice(pt)"
+        value="{{ pt.id }}"
         formControlName="deliveryMethod"
         class="custom-control-input"
       />
-      <label for="{{ method.id }}" class="custom-control-label">
+      <label for="{{ pt.id }}" class="custom-control-label">
         <strong
-          >{{ method.shortName }} - {{ method.price | currency: "VND" }}</strong
+          >{{ pt.ten }}</strong
         >
         <br />
-        <span class="label-description">{{ method.description }}</span>
+        <!--<span class="label-description">{{ method.description }}</span>-->
       </label>
     </div>
   </div>

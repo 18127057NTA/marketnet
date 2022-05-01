@@ -5,11 +5,13 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  Output,
   ViewChild,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { BasketService } from 'src/app/basket/basket.service';
 import { IBasket } from 'src/app/shared/models/basket';
 import { IOrder } from 'src/app/shared/models/order';
@@ -22,8 +24,9 @@ declare var Stripe;
   templateUrl: './checkout-payment.component.html',
   styleUrls: ['./checkout-payment.component.scss'],
 })
-export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
+export class CheckoutPaymentComponent implements OnInit, AfterViewInit, OnDestroy{ // Trước đó , AfterViewInit, OnDestroy
   @Input() checkoutForm: FormGroup;
+  
 
   @ViewChild('cardNumber', { static: true }) cardNumberElement: ElementRef;
   @ViewChild('cardExpiry', { static: true }) cardExpiryElement: ElementRef;
@@ -38,15 +41,36 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
   cardNumberValid = false;
   cardExpiryValid = false;
   cardCvcValid = false;
+  //Thông tin chuyển khoản
+  @Input()ttChuyenKhoan: string;
+  //Tổng tiền cần thanh toán
+  @Input()ttThanhToan: number;
 
   constructor(
     private basketService: BasketService,
     private checkoutService: CheckoutService,
     private toastr: ToastrService,
     private router: Router
-  ) {}
+  ) {
+   }
+
+  ngOnInit(): void {
+    this.getThongTinThanhToan();
+  }
+
+  private getThongTinThanhToan() {
+    //Lấy thông tin chuyển khoản
+    this.ttChuyenKhoan = this.basketService.getCurrentBasketTTCK();
+    //Lấy tổng tiền cần thanh toán
+    this.ttThanhToan = this.basketService.getCurrentBasketTotal();
+  }
 
   ngAfterViewInit(): void {
+    
+    //Lấy thông tin chuyển khoản
+    this.ttChuyenKhoan = this.basketService.getCurrentBasketTTCK();
+    //Lấy tổng tiền cần thanh toán
+    this.ttThanhToan = this.basketService.getCurrentBasketTotal();
     this.stripe = Stripe(
       'pk_test_51KHn0FAjMOHAk3L7pkoEH3pK2HqOHYy1nrharKzRRD7G33BLDyruDhka6KhOw8JZxnuQIl2rGvraCDA8WuxAUMuk00ZxO2DNbk'
     );
@@ -63,6 +87,7 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
     this.cardCvc = elements.create('cardCvc');
     this.cardCvc.mount(this.cardCvcElement.nativeElement);
     this.cardCvc.addEventListener('change', this.cardHandler);
+   
   }
 
   ngOnDestroy(): void {
@@ -120,6 +145,7 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
       },
     });
   }
+  
   private async createOrder(basket: IBasket) {
     const orderToCreate = this.getOrderToCreate(basket);
     return this.checkoutService.createOrder(orderToCreate).toPromise();

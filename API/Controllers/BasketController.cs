@@ -27,10 +27,27 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<BuyerBasket>> UpdateBasket(CustomerBasketDto basket) // trước đó (BuyerBasket basket)
         {
+            //var buyerBasket = _mapper.Map<CustomerBasketDto, BuyerBasket>(basket);
+            //var tempBasket = new BuyerBasket();
+            var tempBasket = await _basketRepository.GetBasketAsync(basket.Id);
+            
+            if(tempBasket != null){
+
+                var newBasket = new BuyerBasket ();
+
+                newBasket.Id = tempBasket.Id;
+                newBasket.Items = tempBasket.Items;
+                newBasket.Total = tempBasket.Total;
+                newBasket.TTChuyenKhoan = tempBasket.TTChuyenKhoan;
+                newBasket.PaymentTypeId = basket.PaymentTypeId;
+
+                var updatedBasket2 = await _basketRepository.UpdateBasketAsync(newBasket);
+                return Ok(updatedBasket2);
+            }
+            
             var buyerBasket = _mapper.Map<CustomerBasketDto, BuyerBasket>(basket);
-
             var updatedBasket = await _basketRepository.UpdateBasketAsync(buyerBasket);
-
+    
             return Ok(updatedBasket);
         }
 

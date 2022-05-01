@@ -29,7 +29,7 @@ namespace Infrastructure.Data.VnvcRepos
             return await _ngTiemCollection.Aggregate()
                 .Match(Builders<NgTiem>.Filter.Eq(x => x.SoDienThoai, sdt)).FirstOrDefaultAsync();
         }
-        
+
         public async Task<DsNgTiem> CreateDsNgTiemAsync(DsNgTiem ds)
         {
             await _dsNgTiemCollection.InsertOneAsync(ds);
@@ -51,6 +51,13 @@ namespace Infrastructure.Data.VnvcRepos
 
             return result.IsAcknowledged && result.ModifiedCount > 0;
 
+        }
+        public async Task<bool> UpdateDsNgTiemWithMaHoaDonAsync(string mgh3, int maHoaDonThuc)
+        {
+            var filter = Builders<DsNgTiem>.Filter.Eq(ds => ds.MaGioHang, mgh3);
+            var update = Builders<DsNgTiem>.Update.Set(ds => ds.MaHoaDon, maHoaDonThuc);
+            var result = await _dsNgTiemCollection.UpdateOneAsync(filter, update);
+            return result.IsAcknowledged && result.ModifiedCount > 0;
         }
     }
 }

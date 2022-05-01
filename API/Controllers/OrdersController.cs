@@ -3,7 +3,9 @@ using API.Errors;
 using API.Extensions;
 using AutoMapper;
 using Core.Entities.OrderAggregate;
+using Core.Entities.VNVCModels;
 using Core.Interfaces;
+using Infrastructure.Data.VnvcRepos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,10 +16,14 @@ namespace API.Controllers
     {
         private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
-        public OrdersController(IOrderService orderService, IMapper mapper)
+        //Mã đặt mua
+        private readonly MaDatMuaRepository _mdmRepository;
+        public OrdersController(IOrderService orderService, IMapper mapper, MaDatMuaRepository mdmRepo)
         {
             _mapper = mapper;
             _orderService = orderService;
+            //Danh sách mã đặt mua
+            _mdmRepository = mdmRepo;
         }
 
         [HttpPost]
@@ -69,5 +75,15 @@ namespace API.Controllers
         {
             return Ok(await _orderService.GetDeliveryMethodsAsync());
         }
+
+        /*[HttpGet("ttChuyenKhoan")]
+        public async Task<ActionResult<ThongTinCK>> GetTTChuyenKhoan([FromQuery] string mgh){
+            var mdm = await _mdmRepository.GetMDMByBasketIdAsync(mgh);
+
+            var thongTinCK = new ThongTinCK {
+                ChuoiKiTu = (mdm.SdtKH + "_" + mdm.Id).ToString()
+            };
+            return thongTinCK;
+        }*/
     }
 }

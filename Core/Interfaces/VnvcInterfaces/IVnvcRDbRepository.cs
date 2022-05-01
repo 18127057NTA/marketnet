@@ -10,5 +10,6 @@ namespace Core.Interfaces.VnvcInterfaces
         Task<bool> UpdateNgMuaBySdt(string ngMuaCc, string ngMuaSdt);
         Task<DonHang> CreateDonHangAsync(DonHang donHang);
         Task<bool> CreateCTDHAsync(ChiTietDonHang ctdhang);
+        Task<bool> UpdateDonHangByTongTien(int maDonHang, int tongtien);
     }
 }

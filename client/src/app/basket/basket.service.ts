@@ -11,6 +11,7 @@ import {
 } from '../shared/models/basket';
 import { IDeliveryMethod } from '../shared/models/deliveryMethod';
 import { IProduct } from '../shared/models/product';
+import { IPTThanhToan } from '../shared/models/vnvc-models/ptthanhtoan';
 
 @Injectable({
   providedIn: 'root',
@@ -37,10 +38,13 @@ export class BasketService {
         })
       );
   }
-
-  setShippingPrice(deliveryMethod: IDeliveryMethod) {
+  //Trước đó
+  //setShippingPrice(deliveryMethod: IDeliveryMethod) {
+  setShippingPrice(pTThanhToan: IPTThanhToan) {
     //this.shipping = deliveryMethod.price;
     const basket = this.getCurrentBasketValue();
+    //Cập nhật lại
+    basket.paymentTypeId = pTThanhToan.id;
     //basket.deliveryMethodId = deliveryMethod.id;
     //basket.shippingPrice = deliveryMethod.price;
     this.calculaTotals();
@@ -52,7 +56,7 @@ export class BasketService {
       map((basket: IBasket) => {
         this.basketSource.next(basket);
         //this.shipping = basket.shippingPrice;
-        //console.log(this.getCurrentBasketValue());
+        
         this.calculaTotals();
       })
     );
@@ -74,6 +78,13 @@ export class BasketService {
   getCurrentBasketValue() {
     console.log(this.basketSource.value);
     return this.basketSource.value;
+  }
+  getCurrentBasketTTCK(){
+    return this.basketSource.value.ttChuyenKhoan;
+  }
+
+  getCurrentBasketTotal(){
+    return this.basketSource.value.total;
   }
 
   addItemToBasket(prodct: IProduct, quant = 1) {
