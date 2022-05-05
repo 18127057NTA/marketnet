@@ -20,17 +20,19 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.returnUrl =
-      this.activateRoute.snapshot.queryParams.returnUrl || '/shop';
+      this.activateRoute.snapshot.queryParams.returnUrl || '/checkout';
     this.createLoginForm();
   }
 
   createLoginForm() {
     this.loginForm = new FormGroup({
-      email: new FormControl('', [
+      /*email: new FormControl('', [
         Validators.required,
         Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$'),
       ]),
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),*/
+      maVip: new FormControl('', Validators.required),
+      //maGioHang: new FormControl('', Validators.required)
     });
   }
 

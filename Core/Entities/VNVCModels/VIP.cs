@@ -4,6 +4,8 @@ namespace Core.Entities.VNVCModels
     {
         public int Id {get; set;}
         public KhachHang KhachHang {get; set;}
+        //Mơi thêm
+        public int KhachHangId {get; set;}
         public string KhachHangMaVip {get; set;}
         public DateTime NgayBD {get; set;}
         public DateTime NgayKT {get; set;}

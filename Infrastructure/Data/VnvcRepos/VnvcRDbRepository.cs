@@ -11,7 +11,6 @@ namespace Infrastructure.Data.VnvcRepos
         {
             _vnvcContxt = vnvcContext;
         }
-
         public async Task<bool> CreateCTDHAsync(ChiTietDonHang ctdhang)
         {
             //Đơn hàng lúc tải vô chưa có id
@@ -44,6 +43,21 @@ namespace Infrastructure.Data.VnvcRepos
         public async Task<KhachHang> GetNgMuaTheoCccdAsync(string cc)
         {
             return await _vnvcContxt.khachHang.FirstOrDefaultAsync(kh => kh.Cccd == cc);
+        }
+
+        public async Task<Vip> GetValidVipAsync(string maVip)
+        {
+            var vip = await this.GetVipAsync(maVip);
+            if(vip != null && vip.NgayBD.Date <= DateTime.Now.Date && vip.NgayKT.Date >= DateTime.Now.Date){
+                return vip;
+            }
+            return null;
+        }
+
+        public async Task<Vip> GetVipAsync(string vipId)
+        {
+            //Lấy thời điểm gấn nhất
+            return await _vnvcContxt.vip.OrderByDescending(v => v.Id).FirstOrDefaultAsync(v=> v.KhachHangMaVip == vipId);//OrderBy(v1 => v1.Id).LastOrDefaultAsync(v => v.KhachHangMaVip == vipId);
         }
 
         public async Task<bool> UpdateDonHangByTongTien(int maDonHang, int tongtien)

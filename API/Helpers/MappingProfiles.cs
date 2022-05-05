@@ -21,6 +21,7 @@ namespace API.Helpers
             CreateMap<Core.Entities.Identity.Address, AddressDto>().ReverseMap();
             CreateMap<CustomerBasketDto, BuyerBasket>()
                 .ForMember(d => d.Total, o => o.MapFrom(s => s.Total))
+                .ForMember(d => d.VipMemberId, o => o.MapFrom(s => s.VipMemberId))
                 .ForMember(d => d.TTChuyenKhoan, o => o.MapFrom(s => s.TTChuyenKhoan));
             CreateMap<BasketItemDto, BasketItem>();
             CreateMap<AddressDto, Core.Entities.OrderAggregate.Address>();

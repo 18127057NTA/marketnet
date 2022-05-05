@@ -54,6 +54,8 @@ namespace API.Controllers
             //Nếu có mã vip Hợp lệ 
             if (basket.PaymentTypeId == 3 && basket.VipMemberId != null){
                 basket.Total = basket.Total * 8 / 10;
+                //Cập nhật giỏ hàng
+                await _basketRepository.UpdateBasketAsync(basket);
             }
             //Lấy mã đặt mua
             //Có thể cần .Result

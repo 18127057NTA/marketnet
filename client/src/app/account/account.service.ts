@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IAddress } from '../shared/models/address';
 import { IUser } from '../shared/models/user';
+import { INgtiem } from 'src/app/shared/models/vnvc-models/ngtiem';
+import { BasketService } from 'src/app/basket/basket.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +17,7 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<IUser>(1); // null -> ?
   currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private basketService: BasketService) {}
 
   loadCurrentUser(token: string) {
     if (token == null) {
@@ -37,12 +39,21 @@ export class AccountService {
   }
 
   login(values: any) {
-    return this.http.post(this.baseUrl + 'account/login', values).pipe(
+
+    /*let maKhVip = {...values};
+    maKhVip.maGioHang = this.basketService.getCurrentBasketValue().id;*/
+
+    let maKHVip = {
+      maVip : values.maVip,
+      maGioHang : this.basketService.getCurrentBasketValue().id
+    };
+
+    return this.http.post(this.baseUrl + 'account/login', maKHVip);/*.pipe(
       map((user: IUser) => {
         //localStorage.setItem('token', user.token);
         this.currentUserSource.next(user);
       })
-    );
+    );*/
   }
 
   register(values: any) {
@@ -52,7 +63,10 @@ export class AccountService {
         this.currentUserSource.next(user);
       })
     );*/
-    return this.http.post(this.baseUrl + 'account/register', values);
+    //Lấy mã giỏ hàng
+    let ttNgTiem = {...values};
+    ttNgTiem.maGioHang = this.basketService.getCurrentBasketValue().id;
+    return this.http.post(this.baseUrl + 'account/register', ttNgTiem);
   }
 
   logout() {

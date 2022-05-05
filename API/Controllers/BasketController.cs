@@ -40,6 +40,7 @@ namespace API.Controllers
                 newBasket.Total = tempBasket.Total;
                 newBasket.TTChuyenKhoan = tempBasket.TTChuyenKhoan;
                 newBasket.PaymentTypeId = basket.PaymentTypeId;
+                newBasket.VipMemberId = tempBasket.VipMemberId;
 
                 var updatedBasket2 = await _basketRepository.UpdateBasketAsync(newBasket);
                 return Ok(updatedBasket2);

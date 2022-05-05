@@ -2,7 +2,7 @@
   <div class="col-3">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="text-center mb-4">
-        <h1 class="h3 mb-3 font-weight-normal">Đăng nhập</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Vui lòng nhập mã vip để hưởng ưu đãi</h1>
       </div>
       <!-- <div class="form-label-group">
         <input
@@ -25,7 +25,7 @@
         />
         <label for="inputPassword">Mật khẩu</label>
       </div> -->
-      <app-text-input
+      <!--<app-text-input
         formControlName="email"
         [label]="'email'"
       ></app-text-input>
@@ -33,6 +33,11 @@
         formControlName="password"
         [label]="'mật khẩu'"
         [type]="'password'"
+      ></app-text-input>-->
+      <app-text-input
+        formControlName="maVip"
+        [label]="'Nhập mã Vip tại đây'"
+        [type]="'maVip'"
       ></app-text-input>
 
       <button
@@ -40,7 +45,7 @@
         class="btn btn-lg btn-primary btn-block"
         type="submit"
       >
-        Đăng nhập
+        Kiểm tra
       </button>
     </form>
   </div>

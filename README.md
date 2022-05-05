@@ -118,3 +118,4 @@ Nối chuỗi
 https://docs.microsoft.com/en-us/dotnet/csharp/how-to/concatenate-multiple-strings
 
 Lấy kết quả trả về dạng Observable:https://stackoverflow.com/questions/61340819/convert-observableobject-to-string
+Chuyển FormGroup vào class interface (javascript): https://stackoverflow.com/questions/52804627/best-way-to-put-formgroup-into-a-class#52804819

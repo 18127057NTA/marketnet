@@ -186,10 +186,24 @@ namespace API.Controllers
             return ttnguoimua;
         }
 
+        //Người dùng nhập mã vip nếu cần
         [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        //public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        public async Task<ActionResult<MaVipDto>> Login(MaVipDto maVipDto)
         {
-            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+            var maKhVip = await _vnvcRDbRepository.GetValidVipAsync(maVipDto.MaVip);
+            //Lấy mã đặt mua -> mã khách hàng
+            var mdmHienTai = await _mdmRepository.GetMDMByBasketIdAsync(maVipDto.MaGioHang);
+            //Nếu còn hạn và đúng khách hàng đang mua
+            if(maKhVip != null && maKhVip.KhachHangId == mdmHienTai.MaKH){
+                //thêm vào giỏ hàng
+                var currentBasket = await _basketRepository.GetBasketAsync(maVipDto.MaGioHang);
+                currentBasket.VipMemberId = maVipDto.MaVip;
+                await _basketRepository.UpdateBasketAsync(currentBasket);
+            }
+            //Ngược lại -> thôi
+            return Ok(maVipDto);
+            /*var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
             if (user == null)
                 return Unauthorized(new ApiResponse(401));
@@ -204,7 +218,7 @@ namespace API.Controllers
                 Phone = user.PhoneNumber,
                 Token = _tokenService.CreateToken(user),
                 DisplayName = user.DisplayName
-            };
+            };*/
         }
         //Đăng ký người tiêm
         [HttpPost("register")]

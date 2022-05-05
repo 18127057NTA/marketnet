@@ -10,7 +10,7 @@ import { Observable, of, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { AccountService } from '../account.service';
 import { BasketService } from 'src/app/basket/basket.service';
-import { INgtiem } from 'src/app/shared/models/vnvc-models/ngtiem';
+
 
 @Component({
   selector: 'app-register',
@@ -84,7 +84,7 @@ export class RegisterComponent implements OnInit {
       ],
       diaChi: [null, [Validators.required]],
       //Lấy giỏ hàng hiện tại
-      maGioHang: this.basketService.getCurrentBasketValue().id
+      maGioHang: null//this.basketService.getCurrentBasketValue().id
     });
   }
 

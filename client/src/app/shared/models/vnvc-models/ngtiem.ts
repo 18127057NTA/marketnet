@@ -1,9 +1,9 @@
 export interface INgtiem{
-    hoVaTen: any;
-    ngaySinh: any;
-    gioiTinh: any;
-    soDienThoai: any;
-    email: any;
-    diaChi: any;
-    maGioHang: any;
+    hoVaTen: string;
+    ngaySinh: string;
+    gioiTinh: string;
+    soDienThoai: string;
+    email: string;
+    diaChi: string;
+    maGioHang: string;
 }

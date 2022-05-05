@@ -11,5 +11,7 @@ namespace Core.Interfaces.VnvcInterfaces
         Task<DonHang> CreateDonHangAsync(DonHang donHang);
         Task<bool> CreateCTDHAsync(ChiTietDonHang ctdhang);
         Task<bool> UpdateDonHangByTongTien(int maDonHang, int tongtien);
+        Task<Vip> GetValidVipAsync(string maVip);
+        Task<Vip> GetVipAsync(string vipId);
     }
 }
