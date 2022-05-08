@@ -92,6 +92,7 @@ export class BasketService {
     const basket = this.getCurrentBasketValue() ?? this.createBasket();
 
     basket.items = this.addOrUpdateItem(basket.items, itemToAdd, quant);
+    console.log(basket.items);
     this.setBasket(basket);
   }
   
